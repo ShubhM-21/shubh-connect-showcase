@@ -18,7 +18,7 @@ const Index = () => {
       <SocialLinks />
       
       {/* Main Content */}
-      <main className="transition-all duration-300 ml-20 lg:ml-24">
+      <main className="transition-all duration-300 ml-16 lg:ml-20">
         <HeroSection />
         
         <ScrollBlurWrapper>

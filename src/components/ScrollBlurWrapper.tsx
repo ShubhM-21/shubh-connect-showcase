@@ -6,7 +6,7 @@ interface ScrollBlurWrapperProps {
 }
 
 export function ScrollBlurWrapper({ children, className = "" }: ScrollBlurWrapperProps) {
-  const [blurAmount, setBlurAmount] = useState(3);
+  const [blurAmount, setBlurAmount] = useState(0);
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -16,17 +16,15 @@ export function ScrollBlurWrapper({ children, className = "" }: ScrollBlurWrappe
       const rect = elementRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
-      // Calculate how much of the element is visible
-      const visibleTop = Math.max(0, rect.top);
-      const visibleBottom = Math.min(windowHeight, rect.bottom);
-      const visibleHeight = visibleBottom - visibleTop;
-      const totalHeight = rect.height;
+      // Calculate distance from viewport center
+      const elementCenter = rect.top + rect.height / 2;
+      const viewportCenter = windowHeight / 2;
+      const distanceFromCenter = Math.abs(elementCenter - viewportCenter);
+      const maxDistance = windowHeight / 2 + rect.height / 2;
       
-      // Calculate visibility percentage
-      const visibilityRatio = Math.max(0, Math.min(1, visibleHeight / Math.min(totalHeight, windowHeight)));
-      
-      // Convert to blur amount (3px blur when not visible, 0px when fully visible)
-      const newBlurAmount = Math.max(0, 3 * (1 - visibilityRatio));
+      // Calculate blur based on distance from center (0 when centered, up to 2px when far)
+      const distanceRatio = Math.min(1, distanceFromCenter / maxDistance);
+      const newBlurAmount = distanceRatio * 2;
       setBlurAmount(newBlurAmount);
     };
 
