@@ -80,7 +80,7 @@ const certifications = [
 
 export function AwardsSection() {
   return (
-    <section id="awards" className="py-20 bg-gradient-to-b from-muted/20 to-background">
+    <section id="awards" className="py-16 px-6 lg:px-12">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in-up">

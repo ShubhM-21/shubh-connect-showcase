@@ -2,7 +2,7 @@ import { Moon, Sun } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
-export function ThemeToggle() {
+export function ThemeToggle({ expanded = false }: { expanded?: boolean }) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
@@ -24,15 +24,24 @@ export function ThemeToggle() {
   return (
     <Button
       variant="ghost"
-      size="icon"
       onClick={toggleTheme}
-      className="glass-card hover:bg-accent/20 transition-all duration-300"
+      className={`glass-card hover:bg-accent/20 transition-all duration-300 justify-start ${
+        expanded ? "w-full h-12 px-4" : "w-12 h-12 px-3"
+      }`}
     >
       {theme === "light" ? (
-        <Moon className="h-4 w-4" />
+        <Moon className="h-4 w-4 flex-shrink-0" />
       ) : (
-        <Sun className="h-4 w-4" />
+        <Sun className="h-4 w-4 flex-shrink-0" />
       )}
+      
+      {/* Expanded Text */}
+      <span className={`ml-3 whitespace-nowrap transition-all duration-300 ${
+        expanded ? "opacity-100 w-auto" : "opacity-0 w-0 overflow-hidden"
+      }`}>
+        {theme === "light" ? "Dark Mode" : "Light Mode"}
+      </span>
+      
       <span className="sr-only">Toggle theme</span>
     </Button>
   );

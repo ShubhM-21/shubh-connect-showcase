@@ -56,7 +56,7 @@ const skills = [
 
 export function ExperienceSection() {
   return (
-    <section id="experience" className="py-20 bg-gradient-to-b from-background to-muted/20">
+    <section id="experience" className="py-16 px-6 lg:px-12 bg-muted/30">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in-up">

@@ -73,7 +73,7 @@ export function ProjectsSection() {
     : projects.filter(project => project.category === activeCategory);
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-muted/20 to-background">
+    <section id="projects" className="py-16 px-6 lg:px-12">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in-up">
