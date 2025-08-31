@@ -25,8 +25,8 @@ export function ThemeToggle({ expanded = false }: { expanded?: boolean }) {
     <Button
       variant="ghost"
       onClick={toggleTheme}
-      className={`glass-card hover:bg-accent/20 transition-all duration-300 justify-start ${
-        expanded ? "w-full h-12 px-4" : "w-12 h-12 px-3"
+      className={`glass-card hover:bg-accent/20 transition-all duration-300 ${
+        expanded ? "w-full h-12 px-4 justify-start" : "w-12 h-12 justify-center"
       }`}
     >
       {theme === "light" ? (

@@ -80,9 +80,9 @@ export function HeroSection() {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+      <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10 min-h-screen">
         {/* Content */}
-        <div className="space-y-8 animate-fade-in-up">
+        <div className="space-y-8 animate-fade-in-up flex flex-col justify-center">
           <div className="space-y-4">
             <p className="text-brand-primary font-medium tracking-wide uppercase text-sm">
               Welcome to my portfolio
@@ -138,7 +138,7 @@ export function HeroSection() {
         </div>
 
         {/* Profile Image */}
-        <div className="flex justify-center lg:justify-end animate-fade-in">
+        <div className="flex justify-center lg:justify-end animate-fade-in items-center">
           <div className="relative">
             {/* Decorative Elements */}
             <div className="absolute -top-4 -left-4 w-72 h-72 bg-gradient-to-br from-brand-green/20 to-brand-primary/20 rounded-3xl blur-3xl animate-float" />

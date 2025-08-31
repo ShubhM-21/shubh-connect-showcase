@@ -65,11 +65,13 @@ export function Navigation() {
               key={item.id}
               variant="ghost"
               onClick={() => scrollToSection(item.id)}
-              className={`relative w-full h-12 rounded-xl transition-all duration-300 justify-start ${
+              className={`relative w-full h-12 rounded-xl transition-all duration-300 ${
+                isExpanded ? "justify-start" : "justify-center"
+              } ${
                 isActive 
                   ? "bg-primary text-primary-foreground shadow-glow" 
                   : "hover:bg-accent/20"
-              } ${isExpanded ? "px-4" : "px-3 w-12"}`}
+              } ${isExpanded ? "px-4" : "w-12"}`}
             >
               <Icon className="h-5 w-5 flex-shrink-0" />
               
@@ -87,7 +89,7 @@ export function Navigation() {
         <div className="w-8 h-px bg-border my-2" />
         
         {/* Theme Toggle */}
-        <div className={`${isExpanded ? "w-full" : "w-12"} transition-all duration-300`}>
+        <div className={`${isExpanded ? "w-full" : "w-12 flex justify-center"} transition-all duration-300`}>
           <ThemeToggle expanded={isExpanded} />
         </div>
       </div>
