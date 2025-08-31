@@ -21,23 +21,23 @@ const Index = () => {
       <main className="transition-all duration-300 ml-16 lg:ml-20">
         <HeroSection />
         
-        <ScrollBlurWrapper protectHeadings={true}>
+        <ScrollBlurWrapper>
           <AboutSection />
         </ScrollBlurWrapper>
         
-        <ScrollBlurWrapper protectHeadings={true}>
+        <ScrollBlurWrapper>
           <ProjectsSection />
         </ScrollBlurWrapper>
         
-        <ScrollBlurWrapper protectHeadings={true}>
+        <ScrollBlurWrapper>
           <ExperienceSection />
         </ScrollBlurWrapper>
         
-        <ScrollBlurWrapper protectHeadings={true}>
+        <ScrollBlurWrapper>
           <AwardsSection />
         </ScrollBlurWrapper>
         
-        <ScrollBlurWrapper protectHeadings={true}>
+        <ScrollBlurWrapper>
           <ContactSection />
         </ScrollBlurWrapper>
       </main>
