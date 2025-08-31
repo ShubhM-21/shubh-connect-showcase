@@ -79,11 +79,6 @@ export function Navigation() {
               }`}>
                 {item.label}
               </span>
-              
-              {/* Active indicator */}
-              {isActive && (
-                <div className="absolute -right-1 top-1/2 -translate-y-1/2 w-1 h-6 bg-primary rounded-full" />
-              )}
             </Button>
           );
         })}

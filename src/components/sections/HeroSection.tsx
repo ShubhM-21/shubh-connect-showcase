@@ -11,32 +11,73 @@ export function HeroSection() {
 
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Animated Background */}
+      {/* Enhanced Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Gradient Orbs */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-br from-brand-sage/20 to-brand-green/20 rounded-full blur-3xl animate-float" />
-        <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-gradient-to-tl from-brand-primary/15 to-brand-light/15 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s" }} />
-        <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-gradient-to-r from-brand-green/10 to-brand-sage/10 rounded-full blur-3xl animate-float" style={{ animationDelay: "4s" }} />
+        {/* Large Gradient Orbs */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-brand-sage/25 to-brand-green/25 rounded-full blur-3xl animate-float opacity-60" />
+        <div className="absolute top-3/4 right-1/4 w-[32rem] h-[32rem] bg-gradient-to-tl from-brand-primary/20 to-brand-light/20 rounded-full blur-3xl animate-float opacity-70" style={{ animationDelay: "2s" }} />
+        <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-gradient-to-r from-brand-green/15 to-brand-sage/15 rounded-full blur-3xl animate-float opacity-50" style={{ animationDelay: "4s" }} />
+        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-br from-brand-primary/10 to-brand-green/20 rounded-full blur-2xl animate-float opacity-80" style={{ animationDelay: "6s" }} />
         
-        {/* Floating Particles */}
-        {[...Array(15)].map((_, i) => (
+        {/* Medium Floating Elements */}
+        {[...Array(8)].map((_, i) => (
           <div
-            key={i}
-            className="absolute w-2 h-2 bg-brand-primary/30 rounded-full animate-float"
+            key={`medium-${i}`}
+            className="absolute w-4 h-4 bg-brand-primary/20 rounded-full animate-float"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${20 + Math.random() * 60}%`,
+              top: `${20 + Math.random() * 60}%`,
               animationDelay: `${Math.random() * 8}s`,
-              animationDuration: `${Math.random() * 6 + 8}s`,
+              animationDuration: `${Math.random() * 6 + 10}s`,
             }}
           />
         ))}
         
-        {/* Subtle Grid Pattern */}
-        <div className="absolute inset-0 opacity-5" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--brand-primary)) 1px, transparent 0)`,
-          backgroundSize: '50px 50px'
-        }} />
+        {/* Small Floating Particles */}
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={`small-${i}`}
+            className="absolute w-2 h-2 bg-brand-green/30 rounded-full animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 12}s`,
+              animationDuration: `${Math.random() * 8 + 12}s`,
+            }}
+          />
+        ))}
+        
+        {/* Subtle Grid Pattern with Animation */}
+        <div 
+          className="absolute inset-0 opacity-5 animate-pulse" 
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--brand-primary)) 1px, transparent 0)`,
+            backgroundSize: '60px 60px',
+            animationDuration: '4s'
+          }} 
+        />
+        
+        {/* Flowing Lines */}
+        <div className="absolute inset-0">
+          <svg className="w-full h-full opacity-10" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M100,300 Q300,100 500,300 T900,300"
+              stroke="hsl(var(--brand-primary))"
+              strokeWidth="2"
+              fill="none"
+              className="animate-pulse"
+              style={{ animationDuration: '6s' }}
+            />
+            <path
+              d="M100,700 Q300,500 500,700 T900,700"
+              stroke="hsl(var(--brand-green))"
+              strokeWidth="2"
+              fill="none"
+              className="animate-pulse"
+              style={{ animationDuration: '8s', animationDelay: '2s' }}
+            />
+          </svg>
+        </div>
       </div>
 
       <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
