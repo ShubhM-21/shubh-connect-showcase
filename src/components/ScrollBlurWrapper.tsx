@@ -16,15 +16,28 @@ export function ScrollBlurWrapper({ children, className = "" }: ScrollBlurWrappe
       const rect = elementRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
-      // Calculate distance from viewport center
+      // Calculate distance from viewport center with improved thresholds
       const elementCenter = rect.top + rect.height / 2;
       const viewportCenter = windowHeight / 2;
       const distanceFromCenter = Math.abs(elementCenter - viewportCenter);
-      const maxDistance = windowHeight / 2 + rect.height / 2;
       
-      // Calculate blur based on distance from center (0 when centered, up to 2px when far)
-      const distanceRatio = Math.min(1, distanceFromCenter / maxDistance);
-      const newBlurAmount = distanceRatio * 2;
+      // Create a focus zone where blur is minimal/zero
+      const focusZone = windowHeight * 0.3; // 30% of viewport height as focus zone
+      const maxDistance = windowHeight * 0.8; // Maximum distance for full blur
+      
+      // No blur when element is in focus zone
+      if (distanceFromCenter <= focusZone) {
+        setBlurAmount(0);
+        return;
+      }
+      
+      // Calculate blur for elements outside focus zone
+      const adjustedDistance = distanceFromCenter - focusZone;
+      const adjustedMaxDistance = maxDistance - focusZone;
+      const distanceRatio = Math.min(1, adjustedDistance / adjustedMaxDistance);
+      
+      // Smoother blur curve with maximum of 3px
+      const newBlurAmount = Math.pow(distanceRatio, 1.5) * 3;
       setBlurAmount(newBlurAmount);
     };
 
@@ -40,7 +53,7 @@ export function ScrollBlurWrapper({ children, className = "" }: ScrollBlurWrappe
       className={className}
       style={{
         filter: `blur(${blurAmount}px)`,
-        transition: "filter 0.6s ease-out",
+        transition: "filter 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
     >
       {children}

@@ -66,14 +66,14 @@ export function Navigation() {
               variant="ghost"
               onClick={() => scrollToSection(item.id)}
               className={`relative w-full h-12 rounded-xl transition-all duration-300 ${
-                isExpanded ? "justify-start" : "justify-center"
+                isExpanded ? "justify-start pl-4" : "justify-center"
               } ${
                 isActive 
                   ? "bg-primary text-primary-foreground shadow-glow" 
                   : "hover:bg-accent/20"
-              } ${isExpanded ? "px-4" : "w-12 px-0"}`}
+              } ${isExpanded ? "" : "w-12 px-0"}`}
             >
-              <Icon className={`h-5 w-5 flex-shrink-0 ${isExpanded ? "" : "mx-auto"}`} />
+              <Icon className="h-5 w-5 flex-shrink-0" />
               
               {/* Expanded Text */}
               <span className={`ml-3 whitespace-nowrap transition-all duration-300 ${
