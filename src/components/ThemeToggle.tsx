@@ -27,12 +27,12 @@ export function ThemeToggle({ expanded = false }: { expanded?: boolean }) {
       onClick={toggleTheme}
       className={`glass-card hover:bg-accent/20 transition-all duration-300 ${
         expanded ? "w-full h-12 px-4 justify-start" : "w-12 h-12 justify-center"
-      }`}
+      } ${expanded ? "" : "px-0"}`}
     >
       {theme === "light" ? (
-        <Moon className="h-4 w-4 flex-shrink-0" />
+        <Moon className={`h-4 w-4 flex-shrink-0 ${expanded ? "" : "mx-auto"}`} />
       ) : (
-        <Sun className="h-4 w-4 flex-shrink-0" />
+        <Sun className={`h-4 w-4 flex-shrink-0 ${expanded ? "" : "mx-auto"}`} />
       )}
       
       {/* Expanded Text */}

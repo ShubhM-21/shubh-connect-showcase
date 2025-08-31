@@ -71,9 +71,9 @@ export function Navigation() {
                 isActive 
                   ? "bg-primary text-primary-foreground shadow-glow" 
                   : "hover:bg-accent/20"
-              } ${isExpanded ? "px-4" : "w-12"}`}
+              } ${isExpanded ? "px-4" : "w-12 px-0"}`}
             >
-              <Icon className="h-5 w-5 flex-shrink-0" />
+              <Icon className={`h-5 w-5 flex-shrink-0 ${isExpanded ? "" : "mx-auto"}`} />
               
               {/* Expanded Text */}
               <span className={`ml-3 whitespace-nowrap transition-all duration-300 ${
