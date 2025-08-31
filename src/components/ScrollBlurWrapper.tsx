@@ -3,9 +3,10 @@ import { useEffect, useRef, useState } from "react";
 interface ScrollBlurWrapperProps {
   children: React.ReactNode;
   className?: string;
+  protectHeadings?: boolean;
 }
 
-export function ScrollBlurWrapper({ children, className = "" }: ScrollBlurWrapperProps) {
+export function ScrollBlurWrapper({ children, className = "", protectHeadings = true }: ScrollBlurWrapperProps) {
   const [blurAmount, setBlurAmount] = useState(0);
   const elementRef = useRef<HTMLDivElement>(null);
 
@@ -16,28 +17,36 @@ export function ScrollBlurWrapper({ children, className = "" }: ScrollBlurWrappe
       const rect = elementRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
-      // Calculate distance from viewport center with improved thresholds
+      // Calculate distance from optimal viewing area
       const elementCenter = rect.top + rect.height / 2;
-      const viewportCenter = windowHeight / 2;
-      const distanceFromCenter = Math.abs(elementCenter - viewportCenter);
+      const optimalViewStart = windowHeight * 0.2; // 20% from top
+      const optimalViewEnd = windowHeight * 0.8;   // 80% from top
       
-      // Create a focus zone where blur is minimal/zero
-      const focusZone = windowHeight * 0.3; // 30% of viewport height as focus zone
-      const maxDistance = windowHeight * 0.8; // Maximum distance for full blur
+      // Check if element is in optimal viewing area
+      const isInOptimalView = elementCenter >= optimalViewStart && elementCenter <= optimalViewEnd;
       
-      // No blur when element is in focus zone
-      if (distanceFromCenter <= focusZone) {
+      if (isInOptimalView) {
+        // No blur when in optimal viewing area
         setBlurAmount(0);
         return;
       }
       
-      // Calculate blur for elements outside focus zone
-      const adjustedDistance = distanceFromCenter - focusZone;
-      const adjustedMaxDistance = maxDistance - focusZone;
-      const distanceRatio = Math.min(1, adjustedDistance / adjustedMaxDistance);
+      // Calculate blur based on distance from optimal viewing area
+      let distanceFromOptimal;
+      if (elementCenter < optimalViewStart) {
+        // Element is above optimal view
+        distanceFromOptimal = optimalViewStart - elementCenter;
+      } else {
+        // Element is below optimal view
+        distanceFromOptimal = elementCenter - optimalViewEnd;
+      }
       
-      // Smoother blur curve with maximum of 3px
-      const newBlurAmount = Math.pow(distanceRatio, 1.5) * 3;
+      // Maximum distance for full blur effect
+      const maxBlurDistance = windowHeight * 0.4;
+      const distanceRatio = Math.min(1, distanceFromOptimal / maxBlurDistance);
+      
+      // Very subtle blur with smooth curve - max 2.5px
+      const newBlurAmount = Math.pow(distanceRatio, 2) * 2.5;
       setBlurAmount(newBlurAmount);
     };
 
@@ -52,11 +61,43 @@ export function ScrollBlurWrapper({ children, className = "" }: ScrollBlurWrappe
       ref={elementRef}
       className={className}
       style={{
-        filter: `blur(${blurAmount}px)`,
-        transition: "filter 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+        filter: blurAmount > 0.1 ? `blur(${blurAmount}px)` : 'none',
+        transition: "filter 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
       }}
     >
-      {children}
+      {protectHeadings ? (
+        <div className="relative">
+          {/* Protected headings layer */}
+          <div className="relative z-10">
+            {React.Children.map(children, (child) => {
+              if (React.isValidElement(child)) {
+                // Clone and modify headings to remove them from blur effect
+                return React.cloneElement(child, {
+                  ...child.props,
+                  children: React.Children.map(child.props.children, (grandChild) => {
+                    if (React.isValidElement(grandChild) && 
+                        typeof grandChild.type === 'string' && 
+                        /^h[1-6]$/.test(grandChild.type)) {
+                      return React.cloneElement(grandChild, {
+                        ...grandChild.props,
+                        style: {
+                          ...grandChild.props.style,
+                          filter: 'none',
+                          position: 'relative',
+                          zIndex: 20
+                        }
+                      });
+                    }
+                    return grandChild;
+                  })
+                });
+              }
+              return child;
+            })}
+          </div>
+        </div>
+      ) : (
+        children
+      )}
     </div>
   );
-}
