@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ExternalLink, Github, Filter, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { ExternalLink, Github, Filter, X, ChevronLeft, ChevronRight, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,135 +12,118 @@ interface Project {
   category: "Product" | "Design" | "Analytics";
   subCategory?: "Product Cases" | "PRD" | "Wireframes";
   description: string;
-  fullDescription: string;
-  impact: string;
+  fullDescription?: string;
+  impact?: string;
   techStack: string[];
+  pdfLink?: string;
   link?: string;
   github?: string;
   featured: boolean;
-  images: string[];
+  images?: string[];
   process?: string[];
   context?: string;
 }
 
 const projects: Project[] = [
+  // Product Cases
   {
     id: 1,
-    title: "Creator Growth Analytics Dashboard",
+    title: "Flipkart: Launching India's Next Global Superstar",
     category: "Product",
     subCategory: "Product Cases",
-    description: "Comprehensive analytics platform for content creators to track engagement metrics, audience growth, and revenue optimization with real-time insights.",
-    fullDescription: "Led the end-to-end development of a sophisticated analytics dashboard that transformed how creators understand and optimize their content performance. The platform integrates multiple data sources to provide actionable insights on audience behavior, content performance, and monetization opportunities.",
-    context: "Rigi needed a way to help creators make data-driven decisions about their content strategy. The existing analytics were fragmented across multiple tools, making it difficult for creators to get a holistic view of their performance.",
-    process: [
-      "Conducted user interviews with 50+ creators to understand pain points",
-      "Analyzed existing analytics tools and identified key gaps",
-      "Created user personas and journey maps",
-      "Designed wireframes and prototypes using Figma",
-      "Collaborated with engineering team for implementation",
-      "Conducted A/B testing on key features",
-      "Iterated based on user feedback and usage data"
-    ],
-    impact: "25% increase in creator retention, 40% improvement in feature adoption, 60% reduction in support tickets",
-    techStack: ["React", "Python", "SQL", "Tableau", "A/B Testing", "Figma"],
-    link: "#",
-    github: "#",
+    description: "A hypothetical strategy for launching India's next global superstar by leveraging talent discovery, branding, and go-to-market planning.",
+    fullDescription: "This comprehensive product case study explores how Flipkart could enter the talent management space by creating a platform to discover, develop, and launch India's next global entertainment superstar. The strategy covers market analysis, user personas, competitive landscape, and detailed go-to-market planning.",
+    context: "With India's growing influence in global entertainment and Flipkart's massive user base, there's an opportunity to create a talent discovery platform that could revolutionize how we identify and nurture entertainment talent.",
+    impact: "Potential to capture 15% of India's talent discovery market, estimated $2B opportunity",
+    techStack: ["Talent Strategy", "Branding", "Go-To-Market"],
+    pdfLink: "https://drive.google.com/file/d/1seIR9Hlt09B_fOLKH5CaID3qiZcB0LXo/view?usp=sharing",
     featured: true,
-    images: ["/api/placeholder/600/400", "/api/placeholder/600/400", "/api/placeholder/600/400"]
+    images: ["/api/placeholder/600/400"]
   },
   {
     id: 2,
-    title: "SaaS Onboarding Flow Redesign",
+    title: "MoveInSync: Expanding into the US Commute Market",
     category: "Product",
-    subCategory: "Wireframes",
-    description: "Complete redesign of user onboarding experience with progressive disclosure and contextual guidance to improve activation rates.",
-    fullDescription: "Redesigned the entire user onboarding experience for a B2B SaaS platform, focusing on reducing cognitive load and improving time-to-value. The new flow uses progressive disclosure and contextual tooltips to guide users through setup.",
-    context: "The existing onboarding had a 45% drop-off rate and users were taking too long to reach their first 'aha' moment. We needed to streamline the process while ensuring users understood the platform's value.",
-    process: [
-      "Analyzed user behavior data and identified drop-off points",
-      "Created detailed user flow diagrams",
-      "Designed low-fidelity wireframes for new flow",
-      "Conducted usability testing with target users",
-      "Refined wireframes based on feedback",
-      "Created high-fidelity prototypes",
-      "Collaborated with development team for implementation"
-    ],
-    impact: "35% improvement in activation rates, 50% reduction in onboarding time, 28% increase in trial-to-paid conversion",
-    techStack: ["Figma", "User Research", "Prototyping", "Usability Testing"],
-    link: "#",
+    subCategory: "Product Cases",
+    description: "A market entry strategy analyzing US commute segments, personas, regulatory challenges, and MVP design for scaling MoveInSync.",
+    fullDescription: "Comprehensive market entry analysis for MoveInSync's expansion into the US corporate commute market. This case study includes detailed market research, regulatory analysis, competitive positioning, and MVP design for the American market.",
+    context: "MoveInSync needed a strategic roadmap to enter the competitive US corporate transportation market while adapting their successful Indian model to American business culture and regulations.",
+    impact: "Identified $5B addressable market with clear path to 3% market share within 3 years",
+    techStack: ["Market Research", "MVP Design", "Competitive Analysis"],
+    pdfLink: "https://drive.google.com/file/d/1wSz71yZohK4HycZStHTEdupcGMih9_BH/view?usp=sharing",
     featured: true,
-    images: ["/api/placeholder/600/400", "/api/placeholder/600/400"]
+    images: ["/api/placeholder/600/400"]
   },
   {
     id: 3,
-    title: "E-commerce Conversion Analysis",
-    category: "Analytics",
-    description: "Deep-dive analysis of e-commerce conversion funnel with actionable recommendations that improved overall conversion rates.",
-    fullDescription: "Conducted comprehensive analysis of an e-commerce platform's conversion funnel, identifying critical drop-off points and implementing data-driven solutions to improve the customer journey from discovery to purchase.",
-    context: "The e-commerce platform was experiencing declining conversion rates despite increased traffic. We needed to understand where users were dropping off and why.",
-    process: [
-      "Set up comprehensive tracking across the entire funnel",
-      "Analyzed user behavior using Google Analytics and Hotjar",
-      "Identified key drop-off points in the purchase journey",
-      "Conducted user interviews to understand friction points",
-      "Created detailed recommendations with priority scoring",
-      "Implemented A/B tests for proposed solutions",
-      "Monitored results and iterated on improvements"
-    ],
-    impact: "22% increase in overall conversion rate, 18% improvement in checkout completion, $2.3M additional annual revenue",
-    techStack: ["SQL", "Python", "Google Analytics", "Tableau", "A/B Testing"],
-    link: "#",
-    featured: false,
+    title: "Ema Unlimited: Transforming Productivity with AI-Powered Task Management",
+    category: "Product",
+    subCategory: "Product Cases",
+    description: "Designing an AI-powered task management solution integrating with enterprise tools to optimize workflows.",
+    fullDescription: "A comprehensive product strategy for Ema Unlimited's AI-powered task management platform. This case study covers user research, AI integration strategies, enterprise tool compatibility, and workflow optimization methodologies.",
+    context: "Enterprise teams struggle with fragmented productivity tools and inefficient task management. Ema Unlimited needed a strategy to create an AI-first solution that could unify and optimize workplace productivity.",
+    impact: "Projected 40% improvement in team productivity and 60% reduction in task management overhead",
+    techStack: ["AI Integration", "Workflow Automation", "User Research"],
+    pdfLink: "https://drive.google.com/file/d/1DVDUBlTd9LZQvg6HXrjSjlzTRm0pRxaS/view?usp=sharing",
+    featured: true,
     images: ["/api/placeholder/600/400"]
   },
   {
     id: 4,
-    title: "Product Requirements Document",
+    title: "Unify Apps: Revolutionizing Hospitality Management",
     category: "Product",
-    subCategory: "PRD",
-    description: "Comprehensive PRD for mobile app feature development including user stories, acceptance criteria, and success metrics.",
-    fullDescription: "Created a detailed Product Requirements Document for a new mobile app feature that would allow users to collaborate on content creation. The PRD included technical specifications, user stories, and detailed success metrics.",
-    context: "The product team needed a clear roadmap for developing a collaborative content creation feature that would differentiate the platform from competitors.",
-    process: [
-      "Gathered requirements from stakeholders",
-      "Conducted competitive analysis",
-      "Created detailed user stories and acceptance criteria",
-      "Defined success metrics and KPIs",
-      "Collaborated with engineering on technical feasibility",
-      "Created mockups and user flows",
-      "Established testing and rollout plan"
-    ],
-    impact: "Clear development roadmap, 30% faster development cycle, improved stakeholder alignment",
-    techStack: ["Product Strategy", "User Stories", "Wireframing", "Stakeholder Management"],
-    link: "#",
+    subCategory: "Product Cases",
+    description: "Identifying gaps in the hospitality software market and proposing innovative, user-focused solutions for hotels and travelers.",
+    fullDescription: "Strategic analysis of the hospitality management software market, identifying key pain points for both hotel operators and travelers. The case study proposes a unified platform that bridges the gap between operational efficiency and guest experience.",
+    context: "The hospitality industry relies on fragmented software solutions that create operational inefficiencies and poor guest experiences. Unify Apps needed a strategy to create a comprehensive solution.",
+    impact: "Potential to improve hotel operational efficiency by 35% and guest satisfaction scores by 25%",
+    techStack: ["Hospitality Tech", "User Interviews", "Competitive Analysis"],
+    pdfLink: "https://drive.google.com/file/d/1XPF0jWuLNduOHhMZnAu-EBBPSpmmzF3l/view?usp=sharing",
     featured: false,
-    images: ["/api/placeholder/600/400", "/api/placeholder/600/400"]
+    images: ["/api/placeholder/600/400"]
   },
+  // PRDs
   {
     id: 5,
-    title: "Design System Components",
-    category: "Design",
-    description: "Comprehensive design system with reusable components, ensuring consistency across all product touchpoints.",
-    fullDescription: "Developed a comprehensive design system that standardized UI components, patterns, and guidelines across multiple product lines. The system improved design consistency and development efficiency.",
-    context: "The company had multiple products with inconsistent design patterns, leading to poor user experience and inefficient development processes.",
-    process: [
-      "Audited existing design patterns across products",
-      "Created component library in Figma",
-      "Established design tokens and guidelines",
-      "Collaborated with development team on implementation",
-      "Created documentation and usage guidelines",
-      "Conducted training sessions for design and development teams"
-    ],
-    impact: "50% reduction in design inconsistencies, 40% faster development time, improved user experience scores",
-    techStack: ["Figma", "Design Systems", "Component Libraries", "Documentation"],
-    link: "#",
-    featured: false,
-    images: ["/api/placeholder/600/400", "/api/placeholder/600/400", "/api/placeholder/600/400"]
+    title: "Smart Configuration Management System for KaneAI",
+    category: "Product",
+    subCategory: "PRD",
+    description: "Building a scalable configuration management system to automate test case allocation, improve usability, and enhance QA efficiency.",
+    fullDescription: "Detailed Product Requirements Document for KaneAI's smart configuration management system. This PRD outlines technical specifications, user stories, acceptance criteria, and implementation roadmap for automating QA processes.",
+    context: "KaneAI's QA teams were spending excessive time on manual test case allocation and configuration management, reducing overall testing efficiency and increasing time-to-market.",
+    impact: "50% reduction in QA setup time, 30% improvement in test coverage, 25% faster release cycles",
+    techStack: ["QA Automation", "Config Management", "Scalability"],
+    pdfLink: "https://drive.google.com/file/d/133-kXPDEQxrL_j0NwDpmTM5GIOdUEbQN/view?usp=sharing",
+    featured: true,
+    images: ["/api/placeholder/600/400"]
+  },
+  {
+    id: 6,
+    title: "Unified SaaS Marketplace Platform for CloudEagle",
+    category: "Product",
+    subCategory: "PRD",
+    description: "Creating a SaaS marketplace to streamline enterprise software discovery, procurement, and vendor management.",
+    fullDescription: "Comprehensive PRD for CloudEagle's unified SaaS marketplace platform. This document details the technical architecture, user flows, and business logic required to create a centralized platform for enterprise software procurement.",
+    context: "Enterprise teams struggle with SaaS sprawl, vendor management, and procurement inefficiencies. CloudEagle needed a unified platform to solve these challenges.",
+    impact: "Projected 45% reduction in procurement time, 30% cost savings on SaaS spending, improved vendor relationship management",
+    techStack: ["SaaS Procurement", "Marketplace Design", "Vendor Management"],
+    pdfLink: "https://drive.google.com/file/d/1Fn5JQS36zsh0qWGnnNfdGqqP3Nh6upGG/view?usp=sharing",
+    featured: true,
+    images: ["/api/placeholder/600/400"]
   }
 ];
 
 const mainCategories = ["All", "Product", "Design", "Analytics"];
 const productSubCategories = ["All", "Product Cases", "PRD", "Wireframes"];
+
+// Helper function to convert Google Drive share link to embed link
+const convertToEmbedLink = (shareLink: string): string => {
+  const fileIdMatch = shareLink.match(/\/d\/([a-zA-Z0-9-_]+)/);
+  if (fileIdMatch) {
+    return `https://drive.google.com/file/d/${fileIdMatch[1]}/preview`;
+  }
+  return shareLink;
+};
 
 export function FeaturedProjectsSection() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -170,20 +153,34 @@ export function FeaturedProjectsSection() {
   };
 
   const nextImage = () => {
-    if (selectedProject) {
+    if (selectedProject && selectedProject.images) {
       setCurrentImageIndex((prev) => 
-        prev === selectedProject.images.length - 1 ? 0 : prev + 1
+        prev === selectedProject.images!.length - 1 ? 0 : prev + 1
       );
     }
   };
 
   const prevImage = () => {
-    if (selectedProject) {
+    if (selectedProject && selectedProject.images) {
       setCurrentImageIndex((prev) => 
-        prev === 0 ? selectedProject.images.length - 1 : prev - 1
+        prev === 0 ? selectedProject.images!.length - 1 : prev - 1
       );
     }
   };
+
+  // Handle ESC key for modal
+  useState(() => {
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeProjectModal();
+      }
+    };
+    
+    if (selectedProject) {
+      document.addEventListener('keydown', handleEsc);
+      return () => document.removeEventListener('keydown', handleEsc);
+    }
+  });
 
   return (
     <section id="featured-projects" className="py-12 px-6 lg:px-12">
@@ -195,7 +192,7 @@ export function FeaturedProjectsSection() {
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             A curated selection of my most impactful work in product management, 
-            design, and analytics that showcase my approach to solving complex problems.
+            showcasing strategic thinking, user research, and data-driven solutions.
           </p>
         </div>
 
@@ -203,7 +200,7 @@ export function FeaturedProjectsSection() {
         <div className="flex flex-col items-center gap-6 mb-12">
           {/* Main Categories */}
           <div className="glass-card p-2 rounded-xl animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2 justify-center">
               {mainCategories.map((category) => (
                 <Button
                   key={category}
@@ -228,7 +225,7 @@ export function FeaturedProjectsSection() {
           {/* Product Sub-categories */}
           {activeCategory === "Product" && (
             <div className="glass-card p-2 rounded-xl animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2 justify-center">
                 {productSubCategories.map((subCategory) => (
                   <Button
                     key={subCategory}
@@ -255,7 +252,7 @@ export function FeaturedProjectsSection() {
             <Card 
               key={project.id}
               className={`glass-card hover:shadow-elegant transition-all duration-500 hover:scale-[1.02] group cursor-pointer ${
-                project.featured ? "md:col-span-2 lg:col-span-1" : ""
+                project.featured ? "ring-2 ring-brand-primary/20" : ""
               }`}
               style={{ animationDelay: `${index * 0.1}s` }}
               onClick={() => openProjectModal(project)}
@@ -271,22 +268,18 @@ export function FeaturedProjectsSection() {
                   <div className="w-full h-full flex items-center justify-center">
                     <div className="text-center">
                       <div className="w-16 h-16 bg-brand-primary/30 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <span className="text-2xl font-bold text-brand-primary">
-                          {project.category.charAt(0)}
-                        </span>
+                        <FileText className="h-8 w-8 text-brand-primary" />
                       </div>
-                      <p className="text-sm text-muted-foreground">{project.category} Project</p>
+                      <p className="text-sm text-muted-foreground">{project.subCategory || project.category}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Project Info */}
                 <div>
-                  <div className="flex items-start justify-between mb-2">
-                    <CardTitle className="text-xl group-hover:text-brand-primary transition-colors leading-tight">
-                      {project.title}
-                    </CardTitle>
-                  </div>
+                  <CardTitle className="text-xl group-hover:text-brand-primary transition-colors leading-tight mb-3">
+                    {project.title}
+                  </CardTitle>
                   
                   <div className="flex items-center gap-2 mb-3">
                     <Badge variant="outline" className="text-xs">
@@ -307,24 +300,26 @@ export function FeaturedProjectsSection() {
                 </p>
 
                 {/* Impact Section */}
-                <div className="p-3 bg-brand-green/10 rounded-lg border border-brand-green/20">
-                  <p className="text-sm font-medium text-brand-dark">
-                    <strong>Impact:</strong> {project.impact}
-                  </p>
-                </div>
+                {project.impact && (
+                  <div className="p-3 bg-brand-green/10 rounded-lg border border-brand-green/20">
+                    <p className="text-sm font-medium text-brand-dark">
+                      <strong>Impact:</strong> {project.impact}
+                    </p>
+                  </div>
+                )}
 
                 {/* Tech Stack */}
                 <div>
-                  <p className="text-sm font-medium mb-2">Tech Stack:</p>
+                  <p className="text-sm font-medium mb-2">Focus Areas:</p>
                   <div className="flex flex-wrap gap-1">
-                    {project.techStack.slice(0, 4).map((tech) => (
+                    {project.techStack.slice(0, 3).map((tech) => (
                       <Badge key={tech} variant="secondary" className="text-xs px-2 py-1">
                         {tech}
                       </Badge>
                     ))}
-                    {project.techStack.length > 4 && (
+                    {project.techStack.length > 3 && (
                       <Badge variant="secondary" className="text-xs px-2 py-1">
-                        +{project.techStack.length - 4} more
+                        +{project.techStack.length - 3} more
                       </Badge>
                     )}
                   </div>
@@ -338,7 +333,7 @@ export function FeaturedProjectsSection() {
                     openProjectModal(project);
                   }}
                 >
-                  <ExternalLink className="mr-2 h-4 w-4" />
+                  <FileText className="mr-2 h-4 w-4" />
                   View Project
                 </Button>
               </CardContent>
@@ -361,172 +356,196 @@ export function FeaturedProjectsSection() {
 
         {/* Project Detail Modal */}
         <Dialog open={!!selectedProject} onOpenChange={closeProjectModal}>
-          <DialogContent className="max-w-4xl max-h-[90vh] p-0 overflow-hidden">
+          <DialogContent className="max-w-6xl max-h-[90vh] p-0 overflow-hidden">
             {selectedProject && (
               <>
-                <DialogHeader className="p-6 pb-0">
+                <DialogHeader className="p-6 pb-4 border-b border-border/50">
                   <div className="flex items-start justify-between">
-                    <div>
-                      <DialogTitle className="text-2xl gradient-text mb-2">
+                    <div className="flex-1">
+                      <DialogTitle className="text-3xl gradient-text mb-3">
                         {selectedProject.title}
                       </DialogTitle>
-                      <div className="flex items-center gap-2">
-                        <Badge variant="outline">{selectedProject.category}</Badge>
+                      <div className="flex items-center gap-3 mb-2">
+                        <Badge variant="outline" className="text-sm">
+                          {selectedProject.category}
+                        </Badge>
                         {selectedProject.subCategory && (
-                          <Badge variant="secondary">{selectedProject.subCategory}</Badge>
+                          <Badge variant="secondary" className="text-sm">
+                            {selectedProject.subCategory}
+                          </Badge>
                         )}
                       </div>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {selectedProject.fullDescription || selectedProject.description}
+                      </p>
                     </div>
                     <Button
                       variant="ghost"
                       size="icon"
                       onClick={closeProjectModal}
-                      className="hover:bg-accent/20"
+                      className="hover:bg-accent/20 ml-4"
                     >
-                      <X className="h-4 w-4" />
+                      <X className="h-5 w-5" />
                     </Button>
                   </div>
                 </DialogHeader>
 
-                <ScrollArea className="max-h-[calc(90vh-120px)]">
-                  <div className="p-6 space-y-8">
-                    {/* Project Images Carousel */}
-                    <div className="relative">
-                      <div className="aspect-video bg-gradient-to-br from-brand-sage/20 to-brand-primary/20 rounded-lg overflow-hidden">
-                        <div className="w-full h-full flex items-center justify-center">
-                          <div className="text-center">
-                            <div className="w-20 h-20 bg-brand-primary/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                              <span className="text-3xl font-bold text-brand-primary">
-                                {selectedProject.category.charAt(0)}
-                              </span>
-                            </div>
-                            <p className="text-lg text-muted-foreground">Project Showcase</p>
-                            <p className="text-sm text-muted-foreground mt-2">
-                              Image {currentImageIndex + 1} of {selectedProject.images.length}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {/* Image Navigation */}
-                      {selectedProject.images.length > 1 && (
-                        <>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            className="absolute left-4 top-1/2 -translate-y-1/2 glass-card"
-                            onClick={prevImage}
-                          >
-                            <ChevronLeft className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            className="absolute right-4 top-1/2 -translate-y-1/2 glass-card"
-                            onClick={nextImage}
-                          >
-                            <ChevronRight className="h-4 w-4" />
-                          </Button>
-                        </>
-                      )}
+                <div className="flex-1 overflow-hidden">
+                  {selectedProject.pdfLink ? (
+                    <div className="h-[calc(90vh-200px)] w-full">
+                      <iframe
+                        src={convertToEmbedLink(selectedProject.pdfLink)}
+                        className="w-full h-full border-0"
+                        title={`${selectedProject.title} - Project Document`}
+                        allow="autoplay"
+                      />
                     </div>
-
-                    {/* Project Details */}
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                      <div className="lg:col-span-2 space-y-6">
-                        {/* Context */}
-                        {selectedProject.context && (
-                          <div>
-                            <h3 className="text-lg font-semibold mb-3">Context</h3>
-                            <p className="text-muted-foreground leading-relaxed">
-                              {selectedProject.context}
-                            </p>
-                          </div>
-                        )}
-
-                        {/* Full Description */}
-                        <div>
-                          <h3 className="text-lg font-semibold mb-3">Overview</h3>
-                          <p className="text-muted-foreground leading-relaxed">
-                            {selectedProject.fullDescription}
-                          </p>
-                        </div>
-
-                        {/* Process */}
-                        {selectedProject.process && (
-                          <div>
-                            <h3 className="text-lg font-semibold mb-3">Process</h3>
-                            <ul className="space-y-2">
-                              {selectedProject.process.map((step, idx) => (
-                                <li key={idx} className="flex items-start gap-3">
-                                  <div className="w-6 h-6 bg-brand-primary/20 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
-                                    <span className="text-xs font-bold text-brand-primary">
-                                      {idx + 1}
+                  ) : (
+                    <ScrollArea className="h-[calc(90vh-200px)]">
+                      <div className="p-6 space-y-8">
+                        {/* Project Images Carousel */}
+                        {selectedProject.images && selectedProject.images.length > 0 && (
+                          <div className="relative">
+                            <div className="aspect-video bg-gradient-to-br from-brand-sage/20 to-brand-primary/20 rounded-lg overflow-hidden">
+                              <div className="w-full h-full flex items-center justify-center">
+                                <div className="text-center">
+                                  <div className="w-20 h-20 bg-brand-primary/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <span className="text-3xl font-bold text-brand-primary">
+                                      {selectedProject.category.charAt(0)}
                                     </span>
                                   </div>
-                                  <span className="text-muted-foreground text-sm leading-relaxed">
-                                    {step}
-                                  </span>
-                                </li>
-                              ))}
-                            </ul>
+                                  <p className="text-lg text-muted-foreground">Project Showcase</p>
+                                  <p className="text-sm text-muted-foreground mt-2">
+                                    Image {currentImageIndex + 1} of {selectedProject.images.length}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            {/* Image Navigation */}
+                            {selectedProject.images.length > 1 && (
+                              <>
+                                <Button
+                                  variant="outline"
+                                  size="icon"
+                                  className="absolute left-4 top-1/2 -translate-y-1/2 glass-card"
+                                  onClick={prevImage}
+                                >
+                                  <ChevronLeft className="h-4 w-4" />
+                                </Button>
+                                <Button
+                                  variant="outline"
+                                  size="icon"
+                                  className="absolute right-4 top-1/2 -translate-y-1/2 glass-card"
+                                  onClick={nextImage}
+                                >
+                                  <ChevronRight className="h-4 w-4" />
+                                </Button>
+                              </>
+                            )}
                           </div>
                         )}
-                      </div>
 
-                      {/* Sidebar */}
-                      <div className="space-y-6">
-                        {/* Impact */}
-                        <Card className="glass-card">
-                          <CardHeader>
-                            <CardTitle className="text-lg">Impact & Results</CardTitle>
-                          </CardHeader>
-                          <CardContent>
-                            <p className="text-sm text-muted-foreground leading-relaxed">
-                              {selectedProject.impact}
-                            </p>
-                          </CardContent>
-                        </Card>
+                        {/* Project Details Grid */}
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                          <div className="lg:col-span-2 space-y-6">
+                            {/* Context */}
+                            {selectedProject.context && (
+                              <div>
+                                <h3 className="text-xl font-semibold mb-4 text-brand-primary">Context</h3>
+                                <p className="text-muted-foreground leading-relaxed">
+                                  {selectedProject.context}
+                                </p>
+                              </div>
+                            )}
 
-                        {/* Tech Stack */}
-                        <Card className="glass-card">
-                          <CardHeader>
-                            <CardTitle className="text-lg">Technologies Used</CardTitle>
-                          </CardHeader>
-                          <CardContent>
-                            <div className="flex flex-wrap gap-2">
-                              {selectedProject.techStack.map((tech) => (
-                                <Badge key={tech} variant="secondary" className="text-xs">
-                                  {tech}
-                                </Badge>
-                              ))}
+                            {/* Process */}
+                            {selectedProject.process && (
+                              <div>
+                                <h3 className="text-xl font-semibold mb-4 text-brand-primary">Process</h3>
+                                <ul className="space-y-3">
+                                  {selectedProject.process.map((step, idx) => (
+                                    <li key={idx} className="flex items-start gap-4">
+                                      <div className="w-8 h-8 bg-brand-primary/20 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
+                                        <span className="text-sm font-bold text-brand-primary">
+                                          {idx + 1}
+                                        </span>
+                                      </div>
+                                      <span className="text-muted-foreground leading-relaxed">
+                                        {step}
+                                      </span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Sidebar */}
+                          <div className="space-y-6">
+                            {/* Impact */}
+                            {selectedProject.impact && (
+                              <Card className="glass-card">
+                                <CardHeader>
+                                  <CardTitle className="text-lg text-brand-primary">Impact & Results</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                  <p className="text-sm text-muted-foreground leading-relaxed">
+                                    {selectedProject.impact}
+                                  </p>
+                                </CardContent>
+                              </Card>
+                            )}
+
+                            {/* Tech Stack */}
+                            <Card className="glass-card">
+                              <CardHeader>
+                                <CardTitle className="text-lg text-brand-primary">Focus Areas</CardTitle>
+                              </CardHeader>
+                              <CardContent>
+                                <div className="flex flex-wrap gap-2">
+                                  {selectedProject.techStack.map((tech) => (
+                                    <Badge key={tech} variant="secondary" className="text-xs">
+                                      {tech}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </CardContent>
+                            </Card>
+
+                            {/* Action Buttons */}
+                            <div className="space-y-3">
+                              {selectedProject.pdfLink && (
+                                <Button className="w-full" asChild>
+                                  <a href={selectedProject.pdfLink} target="_blank" rel="noopener noreferrer">
+                                    <ExternalLink className="mr-2 h-4 w-4" />
+                                    Open Full PDF
+                                  </a>
+                                </Button>
+                              )}
+                              {selectedProject.link && (
+                                <Button variant="outline" className="w-full" asChild>
+                                  <a href={selectedProject.link} target="_blank" rel="noopener noreferrer">
+                                    <ExternalLink className="mr-2 h-4 w-4" />
+                                    View Live Project
+                                  </a>
+                                </Button>
+                              )}
+                              {selectedProject.github && (
+                                <Button variant="outline" className="w-full" asChild>
+                                  <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
+                                    <Github className="mr-2 h-4 w-4" />
+                                    View Code
+                                  </a>
+                                </Button>
+                              )}
                             </div>
-                          </CardContent>
-                        </Card>
-
-                        {/* Action Buttons */}
-                        <div className="space-y-3">
-                          {selectedProject.link && (
-                            <Button className="w-full" asChild>
-                              <a href={selectedProject.link} target="_blank" rel="noopener noreferrer">
-                                <ExternalLink className="mr-2 h-4 w-4" />
-                                View Live Project
-                              </a>
-                            </Button>
-                          )}
-                          {selectedProject.github && (
-                            <Button variant="outline" className="w-full" asChild>
-                              <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
-                                <Github className="mr-2 h-4 w-4" />
-                                View Code
-                              </a>
-                            </Button>
-                          )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </ScrollArea>
+                    </ScrollArea>
+                  )}
+                </div>
               </>
             )}
           </DialogContent>

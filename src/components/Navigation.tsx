@@ -8,6 +8,7 @@ const navItems = [
   { id: "about", label: "About", icon: User },
   { id: "projects", label: "Projects", icon: FolderOpen },
   { id: "featured-projects", label: "Featured", icon: FolderOpen },
+  { id: "featured-projects", label: "Featured", icon: FolderOpen },
   { id: "experience", label: "Experience", icon: Briefcase },
   { id: "awards", label: "Awards", icon: Award },
   { id: "contact", label: "Contact", icon: Mail },

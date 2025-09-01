@@ -31,6 +31,10 @@ const Index = () => {
         </ScrollBlurWrapper>
         
         <ScrollBlurWrapper protectHeadings={true}>
+          <FeaturedProjectsSection />
+        </ScrollBlurWrapper>
+        
+        <ScrollBlurWrapper protectHeadings={true}>
           <ExperienceSection />
         </ScrollBlurWrapper>
         
