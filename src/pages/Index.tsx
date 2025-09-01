@@ -3,7 +3,6 @@ import { SocialLinks } from "@/components/SocialLinks";
 import { ScrollBlurWrapper } from "@/components/ScrollBlurWrapper";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
-import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { FeaturedProjectsSection } from "@/components/sections/FeaturedProjectsSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { AwardsSection } from "@/components/sections/AwardsSection";
@@ -24,10 +23,6 @@ const Index = () => {
         
         <ScrollBlurWrapper protectHeadings={true}>
           <AboutSection />
-        </ScrollBlurWrapper>
-        
-        <ScrollBlurWrapper protectHeadings={true}>
-          <ProjectsSection />
         </ScrollBlurWrapper>
         
         <ScrollBlurWrapper protectHeadings={true}>

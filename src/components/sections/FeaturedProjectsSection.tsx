@@ -183,7 +183,7 @@ export function FeaturedProjectsSection() {
   });
 
   return (
-    <section id="featured-projects" className="py-12 px-6 lg:px-12">
+    <section id="projects" className="py-12 px-6 lg:px-12">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in-up">
