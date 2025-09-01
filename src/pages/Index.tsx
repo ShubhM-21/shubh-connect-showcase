@@ -4,6 +4,7 @@ import { ScrollBlurWrapper } from "@/components/ScrollBlurWrapper";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
+import { FeaturedProjectsSection } from "@/components/sections/FeaturedProjectsSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { AwardsSection } from "@/components/sections/AwardsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
