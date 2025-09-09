@@ -4,6 +4,27 @@ import { Badge } from "@/components/ui/badge";
 
 const experiences = [
   {
+    title: "Program Manager Intern (Founder's Office)",
+    company: "Niyo Solutions",
+    location: "Bangalore, India",
+    period: "May 2025 - Present",
+    type: "Internship",
+    description: "Leading end-to-end remittance funnel optimization and partner integrations to drive adoption and improve user experience in the fintech space.",
+    responsibilities: [
+      "Owned remittance funnel end‑to‑end; mapped pain points, fixed drop‑offs, and shipped experiments that lifted adoption and repeats",
+      "Scaled remittance via partner integrations and in‑app placements; defined metrics, ran A/Bs, and improved CTR→transfer conversion",
+      "Reduced KYC verification TAT by redesigning SOPs and automating edge‑case routing; set SLAs and event telemetry to cut retries",
+      "Built P&L and cohort models for rewards; optimized unit economics with ROI guardrails to curb coins burn while sustaining growth",
+      "Instrumented funnel stages (view→recipient→KYC→pay→settle) with dashboards and alerts to drive weekly product/ops rituals"
+    ],
+    technologies: ["Product Strategy", "User Research", "A/B Testing", "Analytics", "Figma"],
+    achievements: [
+      "Improved remittance funnel conversion rates through systematic optimization",
+      "Reduced KYC verification turnaround time significantly",
+      "Built comprehensive P&L models for sustainable growth"
+    ]
+  },
+  {
     title: "Product Intern",
     company: "Rigi",
     location: "Bangalore, India",

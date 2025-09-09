@@ -123,20 +123,16 @@ export function HeroSection() {
           {/* Stats */}
           <div className="flex flex-wrap gap-8 pt-8 border-t border-border/50">
             <div className="text-center">
-              <div className="text-3xl font-bold gradient-text">2+</div>
+              <div className="text-3xl font-bold gradient-text">1+</div>
               <div className="text-sm text-muted-foreground">Years of Impact-Driven Internships</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold gradient-text">3</div>
-              <div className="text-sm text-muted-foreground">Product Launches</div>
+              <div className="text-sm text-muted-foreground">Product Launches/Improvements</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold gradient-text">95+</div>
-              <div className="text-sm text-muted-foreground">Content Pieces Created</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold gradient-text">12.5%</div>
-              <div className="text-sm text-muted-foreground">Conversion Rate Achieved</div>
+              <div className="text-3xl font-bold gradient-text">3</div>
+              <div className="text-sm text-muted-foreground">Major Recognitions</div>
             </div>
           </div>
         </div>

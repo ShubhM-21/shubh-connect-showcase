@@ -31,25 +31,19 @@ const socialLinks = [
   { 
     icon: Linkedin, 
     label: "LinkedIn", 
-    href: "https://linkedin.com/in/shubh-madhyan",
+    href: "https://www.linkedin.com/in/shubh-madhyan-5a19b8251/",
     color: "text-blue-600 hover:text-blue-700"
   },
   { 
     icon: Github, 
     label: "GitHub", 
-    href: "https://github.com",
+    href: "https://github.com/ShubhM-21",
     color: "text-gray-800 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white"
-  },
-  { 
-    icon: Twitter, 
-    label: "Twitter", 
-    href: "https://twitter.com",
-    color: "text-blue-400 hover:text-blue-500"
   },
   { 
     icon: Instagram, 
     label: "Instagram", 
-    href: "https://instagram.com",
+    href: "https://www.instagram.com/shubh_madhyan/",
     color: "text-pink-600 hover:text-pink-700"
   }
 ];

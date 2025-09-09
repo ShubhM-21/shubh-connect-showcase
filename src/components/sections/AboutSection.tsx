@@ -53,7 +53,7 @@ export function AboutSection() {
                 strategic thinking, and measurable impact.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Through impactful internships at <strong>Rigi</strong> and <strong>Dunlin (SaaSDen)</strong>, 
+                Through impactful internships at <strong className="text-brand-primary">Rigi</strong> and <strong className="text-brand-primary">Dunlin (SaaSDen)</strong>, 
                 I've successfully launched products, optimized user experiences, and achieved measurable 
                 business outcomes through strategic product management.
               </p>

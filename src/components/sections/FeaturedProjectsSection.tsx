@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ExternalLink, Github, Filter, X, ChevronLeft, ChevronRight, FileText } from "lucide-react";
+import { ExternalLink, Github, Filter, X, ChevronUp, ChevronDown, FileText, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -18,8 +18,8 @@ interface Project {
   pdfLink?: string;
   link?: string;
   github?: string;
+  imageUrl?: string;
   featured: boolean;
-  images?: string[];
   process?: string[];
   context?: string;
 }
@@ -37,8 +37,8 @@ const projects: Project[] = [
     impact: "Potential to capture 15% of India's talent discovery market, estimated $2B opportunity",
     techStack: ["Talent Strategy", "Branding", "Go-To-Market"],
     pdfLink: "https://drive.google.com/file/d/1seIR9Hlt09B_fOLKH5CaID3qiZcB0LXo/view?usp=sharing",
+    imageUrl: "https://drive.google.com/uc?export=view&id=1FYuB79B19IQPHwuiLzzXvrSJTvFhRht0",
     featured: true,
-    images: ["/api/placeholder/600/400"]
   },
   {
     id: 2,
@@ -51,8 +51,8 @@ const projects: Project[] = [
     impact: "Identified $5B addressable market with clear path to 3% market share within 3 years",
     techStack: ["Market Research", "MVP Design", "Competitive Analysis"],
     pdfLink: "https://drive.google.com/file/d/1wSz71yZohK4HycZStHTEdupcGMih9_BH/view?usp=sharing",
+    imageUrl: "https://drive.google.com/uc?export=view&id=1uc1D7uTQz10e2sTuOKnGhF7CD-w6iT61",
     featured: true,
-    images: ["/api/placeholder/600/400"]
   },
   {
     id: 3,
@@ -65,8 +65,8 @@ const projects: Project[] = [
     impact: "Projected 40% improvement in team productivity and 60% reduction in task management overhead",
     techStack: ["AI Integration", "Workflow Automation", "User Research"],
     pdfLink: "https://drive.google.com/file/d/1DVDUBlTd9LZQvg6HXrjSjlzTRm0pRxaS/view?usp=sharing",
+    imageUrl: "https://drive.google.com/uc?export=view&id=1pLXRkSPaEvNPPq4DIhDIKjNm1FR8HeVz",
     featured: true,
-    images: ["/api/placeholder/600/400"]
   },
   {
     id: 4,
@@ -79,8 +79,8 @@ const projects: Project[] = [
     impact: "Potential to improve hotel operational efficiency by 35% and guest satisfaction scores by 25%",
     techStack: ["Hospitality Tech", "User Interviews", "Competitive Analysis"],
     pdfLink: "https://drive.google.com/file/d/1XPF0jWuLNduOHhMZnAu-EBBPSpmmzF3l/view?usp=sharing",
+    imageUrl: "https://drive.google.com/uc?export=view&id=1QMMe_zQLItbEuB3ao1cemKt5H86ZP1t0",
     featured: false,
-    images: ["/api/placeholder/600/400"]
   },
   // PRDs
   {
@@ -94,8 +94,8 @@ const projects: Project[] = [
     impact: "50% reduction in QA setup time, 30% improvement in test coverage, 25% faster release cycles",
     techStack: ["QA Automation", "Config Management", "Scalability"],
     pdfLink: "https://drive.google.com/file/d/133-kXPDEQxrL_j0NwDpmTM5GIOdUEbQN/view?usp=sharing",
+    imageUrl: "https://drive.google.com/uc?export=view&id=13Orp7b5o38nqLqi6aVQsGNna22z0_qW_",
     featured: true,
-    images: ["/api/placeholder/600/400"]
   },
   {
     id: 6,
@@ -108,8 +108,45 @@ const projects: Project[] = [
     impact: "Projected 45% reduction in procurement time, 30% cost savings on SaaS spending, improved vendor relationship management",
     techStack: ["SaaS Procurement", "Marketplace Design", "Vendor Management"],
     pdfLink: "https://drive.google.com/file/d/1Fn5JQS36zsh0qWGnnNfdGqqP3Nh6upGG/view?usp=sharing",
+    imageUrl: "https://drive.google.com/uc?export=view&id=1cDGir_Sj0KJbAMVz7LR4RzO_fB99B6C7",
     featured: true,
-    images: ["/api/placeholder/600/400"]
+  },
+  // Analytics Projects
+  {
+    id: 7,
+    title: "Financial Modeling & Valuation Analysis",
+    category: "Analytics",
+    description: "Comprehensive financial modeling using DCF analysis, ratio analysis, and valuation techniques for investment decision-making.",
+    fullDescription: "Built sophisticated financial models incorporating discounted cash flow (DCF) analysis, comprehensive ratio analysis, and multiple valuation methodologies. The project demonstrates advanced Excel modeling skills for investment analysis and corporate finance decision-making.",
+    context: "Financial modeling is crucial for investment decisions and corporate strategy. This project showcases the ability to build robust financial models that can guide strategic business decisions.",
+    impact: "Created reusable financial modeling framework for investment analysis and valuation",
+    techStack: ["Excel", "Financial Modeling", "DCF Analysis", "Valuation"],
+    github: "https://github.com/ShubhM-21/Financial-Model",
+    featured: false
+  },
+  {
+    id: 8,
+    title: "Bank Loan Data Analysis & Dashboard",
+    category: "Analytics",
+    description: "End-to-end analysis of bank loan portfolio using SQL queries and Power BI dashboards to derive actionable business insights.",
+    fullDescription: "Comprehensive analysis of bank loan data using advanced SQL queries for data extraction and transformation, combined with interactive Power BI dashboards. The project provides insights into loan performance, risk assessment, and portfolio optimization strategies.",
+    context: "Banks need data-driven insights to optimize their loan portfolios and manage risk effectively. This project demonstrates the ability to transform raw banking data into actionable business intelligence.",
+    impact: "Identified key risk factors and optimization opportunities in loan portfolio management",
+    techStack: ["SQL", "Power BI", "Data Analysis", "Banking"],
+    github: "https://github.com/ShubhM-21/BankLoan-DataAnalysis-SQL-PowerBI",
+    featured: false
+  },
+  {
+    id: 9,
+    title: "E-Commerce Sales Analysis & Insights",
+    category: "Analytics",
+    description: "Exploratory data analysis of e-commerce sales data using Python to uncover sales trends, customer behavior, and growth opportunities.",
+    fullDescription: "Comprehensive exploratory data analysis (EDA) of e-commerce sales data using Python libraries including Pandas, NumPy, Matplotlib, and Seaborn. The analysis reveals customer purchasing patterns, seasonal trends, and actionable insights for business growth.",
+    context: "E-commerce businesses generate vast amounts of data that can provide valuable insights into customer behavior and sales performance. This project demonstrates the ability to extract meaningful insights from complex datasets.",
+    impact: "Identified key sales trends and customer segments leading to data-driven growth strategies",
+    techStack: ["Python", "Pandas", "Data Visualization", "EDA"],
+    github: "https://github.com/ShubhM-21/EDA_E-Commerce_Sales_Python",
+    featured: false
   }
 ];
 
@@ -130,6 +167,7 @@ export function FeaturedProjectsSection() {
   const [activeSubCategory, setActiveSubCategory] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showAllProjects, setShowAllProjects] = useState(false);
 
   const filteredProjects = projects.filter(project => {
     if (activeCategory === "All") return true;
@@ -142,6 +180,9 @@ export function FeaturedProjectsSection() {
     return true;
   });
 
+  const displayedProjects = showAllProjects ? filteredProjects : filteredProjects.slice(0, 6);
+  const hasMoreProjects = filteredProjects.length > 6;
+
   const openProjectModal = (project: Project) => {
     setSelectedProject(project);
     setCurrentImageIndex(0);
@@ -150,22 +191,6 @@ export function FeaturedProjectsSection() {
   const closeProjectModal = () => {
     setSelectedProject(null);
     setCurrentImageIndex(0);
-  };
-
-  const nextImage = () => {
-    if (selectedProject && selectedProject.images) {
-      setCurrentImageIndex((prev) => 
-        prev === selectedProject.images!.length - 1 ? 0 : prev + 1
-      );
-    }
-  };
-
-  const prevImage = () => {
-    if (selectedProject && selectedProject.images) {
-      setCurrentImageIndex((prev) => 
-        prev === 0 ? selectedProject.images!.length - 1 : prev - 1
-      );
-    }
   };
 
   // Handle ESC key for modal
@@ -208,6 +233,7 @@ export function FeaturedProjectsSection() {
                   onClick={() => {
                     setActiveCategory(category);
                     setActiveSubCategory("All");
+                    setShowAllProjects(false);
                   }}
                   className={`px-6 py-2 rounded-lg transition-all duration-300 ${
                     activeCategory === category 
@@ -230,7 +256,10 @@ export function FeaturedProjectsSection() {
                   <Button
                     key={subCategory}
                     variant={activeSubCategory === subCategory ? "secondary" : "ghost"}
-                    onClick={() => setActiveSubCategory(subCategory)}
+                    onClick={() => {
+                      setActiveSubCategory(subCategory);
+                      setShowAllProjects(false);
+                    }}
                     size="sm"
                     className={`px-4 py-1 rounded-lg transition-all duration-300 ${
                       activeSubCategory === subCategory 
@@ -248,7 +277,7 @@ export function FeaturedProjectsSection() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
+          {displayedProjects.map((project, index) => (
             <Card 
               key={project.id}
               className={`glass-card hover:shadow-elegant transition-all duration-500 hover:scale-[1.02] group cursor-pointer ${
@@ -265,10 +294,27 @@ export function FeaturedProjectsSection() {
                       <Badge className="bg-primary text-primary-foreground">Featured</Badge>
                     </div>
                   )}
-                  <div className="w-full h-full flex items-center justify-center">
+                  {project.imageUrl ? (
+                    <img 
+                      src={project.imageUrl} 
+                      alt={project.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        // Fallback to placeholder if image fails to load
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        target.nextElementSibling?.classList.remove('hidden');
+                      }}
+                    />
+                  ) : null}
+                  <div className={`w-full h-full flex items-center justify-center ${project.imageUrl ? 'hidden' : ''}`}>
                     <div className="text-center">
                       <div className="w-16 h-16 bg-brand-primary/30 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <FileText className="h-8 w-8 text-brand-primary" />
+                        {project.category === "Analytics" ? (
+                          <BarChart3 className="h-8 w-8 text-brand-primary" />
+                        ) : (
+                          <FileText className="h-8 w-8 text-brand-primary" />
+                        )}
                       </div>
                       <p className="text-sm text-muted-foreground">{project.subCategory || project.category}</p>
                     </div>
@@ -326,20 +372,57 @@ export function FeaturedProjectsSection() {
                 </div>
 
                 {/* Action Button */}
-                <Button 
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    openProjectModal(project);
-                  }}
-                >
-                  <FileText className="mr-2 h-4 w-4" />
-                  View Project
-                </Button>
+                {project.github ? (
+                  <Button 
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(project.github, '_blank');
+                    }}
+                  >
+                    <Github className="mr-2 h-4 w-4" />
+                    View Project
+                  </Button>
+                ) : (
+                  <Button 
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openProjectModal(project);
+                    }}
+                  >
+                    <FileText className="mr-2 h-4 w-4" />
+                    View Project
+                  </Button>
+                )}
               </CardContent>
             </Card>
           ))}
         </div>
+
+        {/* See More / Show Less Button */}
+        {hasMoreProjects && (
+          <div className="text-center mt-12 animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
+            <Button
+              onClick={() => setShowAllProjects(!showAllProjects)}
+              variant="outline"
+              size="lg"
+              className="glass-card hover:bg-accent/20 transition-all duration-300 px-8"
+            >
+              {showAllProjects ? (
+                <>
+                  <ChevronUp className="mr-2 h-5 w-5" />
+                  Show Less
+                </>
+              ) : (
+                <>
+                  <ChevronDown className="mr-2 h-5 w-5" />
+                  See More Projects ({filteredProjects.length - 6} more)
+                </>
+              )}
+            </Button>
+          </div>
+        )}
 
         {/* Empty State */}
         {filteredProjects.length === 0 && (
@@ -403,46 +486,14 @@ export function FeaturedProjectsSection() {
                   ) : (
                     <ScrollArea className="h-[calc(90vh-200px)]">
                       <div className="p-6 space-y-8">
-                        {/* Project Images Carousel */}
-                        {selectedProject.images && selectedProject.images.length > 0 && (
-                          <div className="relative">
-                            <div className="aspect-video bg-gradient-to-br from-brand-sage/20 to-brand-primary/20 rounded-lg overflow-hidden">
-                              <div className="w-full h-full flex items-center justify-center">
-                                <div className="text-center">
-                                  <div className="w-20 h-20 bg-brand-primary/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <span className="text-3xl font-bold text-brand-primary">
-                                      {selectedProject.category.charAt(0)}
-                                    </span>
-                                  </div>
-                                  <p className="text-lg text-muted-foreground">Project Showcase</p>
-                                  <p className="text-sm text-muted-foreground mt-2">
-                                    Image {currentImageIndex + 1} of {selectedProject.images.length}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                            
-                            {/* Image Navigation */}
-                            {selectedProject.images.length > 1 && (
-                              <>
-                                <Button
-                                  variant="outline"
-                                  size="icon"
-                                  className="absolute left-4 top-1/2 -translate-y-1/2 glass-card"
-                                  onClick={prevImage}
-                                >
-                                  <ChevronLeft className="h-4 w-4" />
-                                </Button>
-                                <Button
-                                  variant="outline"
-                                  size="icon"
-                                  className="absolute right-4 top-1/2 -translate-y-1/2 glass-card"
-                                  onClick={nextImage}
-                                >
-                                  <ChevronRight className="h-4 w-4" />
-                                </Button>
-                              </>
-                            )}
+                        {/* Project Image */}
+                        {selectedProject.imageUrl && (
+                          <div className="aspect-video bg-gradient-to-br from-brand-sage/20 to-brand-primary/20 rounded-lg overflow-hidden">
+                            <img 
+                              src={selectedProject.imageUrl} 
+                              alt={selectedProject.title}
+                              className="w-full h-full object-cover"
+                            />
                           </div>
                         )}
 
