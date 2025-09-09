@@ -253,7 +253,7 @@ export function FeaturedProjectsSection() {
               key={project.id}
               className={`glass-card hover:shadow-elegant transition-all duration-500 hover:scale-[1.02] group cursor-pointer ${
                 project.featured ? "ring-2 ring-brand-primary/20" : ""
-              }`}
+              } hover:ring-2 hover:ring-brand-primary/30`}
               style={{ animationDelay: `${index * 0.1}s` }}
               onClick={() => openProjectModal(project)}
             >
@@ -327,7 +327,7 @@ export function FeaturedProjectsSection() {
 
                 {/* Action Button */}
                 <Button 
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 group-hover:scale-105"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl"
                   onClick={(e) => {
                     e.stopPropagation();
                     openProjectModal(project);

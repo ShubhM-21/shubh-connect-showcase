@@ -48,14 +48,14 @@ export function AboutSection() {
                 My Mission
               </h3>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                To create digital products that not only solve real problems but also delight users. 
-                I believe great products emerge from the intersection of user empathy, data insights, 
-                and strategic thinking.
+                To transform complex user needs into intuitive digital experiences through data-driven 
+                product decisions. I believe exceptional products are born from deep user understanding, 
+                strategic thinking, and measurable impact.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                With experience at <strong>Rigi</strong> and <strong>Dunlin (SaaSDen)</strong>, 
-                I've learned to balance user needs with business objectives while leveraging data 
-                to make informed decisions.
+                Through impactful internships at <strong>Rigi</strong> and <strong>Dunlin (SaaSDen)</strong>, 
+                I've successfully launched products, optimized user experiences, and achieved measurable 
+                business outcomes through strategic product management.
               </p>
             </div>
 

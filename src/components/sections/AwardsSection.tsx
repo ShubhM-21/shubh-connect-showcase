@@ -164,12 +164,12 @@ export function AwardsSection() {
               <CardContent className="space-y-6">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-center p-4 bg-gradient-to-br from-brand-sage/20 to-brand-primary/20 rounded-lg">
-                    <div className="text-2xl font-bold gradient-text">5</div>
-                    <div className="text-xs text-muted-foreground">Major Awards</div>
+                    <div className="text-2xl font-bold gradient-text">3</div>
+                    <div className="text-xs text-muted-foreground">Major Recognitions</div>
                   </div>
                   <div className="text-center p-4 bg-gradient-to-br from-brand-green/20 to-brand-sage/20 rounded-lg">
-                    <div className="text-2xl font-bold gradient-text">8.7</div>
-                    <div className="text-xs text-muted-foreground">GPA Score</div>
+                    <div className="text-2xl font-bold gradient-text">7.16</div>
+                    <div className="text-xs text-muted-foreground">CGPA Score</div>
                   </div>
                   <div className="text-center p-4 bg-gradient-to-br from-brand-primary/20 to-brand-green/20 rounded-lg">
                     <div className="text-2xl font-bold gradient-text">25+</div>

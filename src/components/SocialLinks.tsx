@@ -1,11 +1,10 @@
-import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
+import { Github, Linkedin, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const socialLinks = [
-  { icon: Linkedin, href: "https://linkedin.com/in/shubh-madhyan", label: "LinkedIn" },
-  { icon: Github, href: "https://github.com", label: "GitHub" },
-  { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-  { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/shubh-madhyan-5a19b8251/", label: "LinkedIn" },
+  { icon: Github, href: "https://github.com/ShubhM-21", label: "GitHub" },
+  { icon: Instagram, href: "https://www.instagram.com/shubh_madhyan/", label: "Instagram" },
 ];
 
 export function SocialLinks() {

@@ -92,11 +92,11 @@ export function HeroSection() {
               <span className="text-foreground">Madhyan</span>
             </h1>
             <h2 className="text-2xl lg:text-3xl font-light text-muted-foreground">
-              Aspiring Product Manager / Analyst
+              Product Manager | Turning Data Into User-Centered Solutions
             </h2>
             <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
-              Turning data-driven insights into impactful user experiences. 
-              Combining analytical thinking with product strategy to build solutions that matter.
+              Transforming complex data into actionable insights that drive user-centered product decisions. 
+              Proven track record of launching products and optimizing user experiences through strategic thinking.
             </p>
           </div>
 
@@ -124,15 +124,19 @@ export function HeroSection() {
           <div className="flex flex-wrap gap-8 pt-8 border-t border-border/50">
             <div className="text-center">
               <div className="text-3xl font-bold gradient-text">2+</div>
-              <div className="text-sm text-muted-foreground">Years Experience</div>
+              <div className="text-sm text-muted-foreground">Years of Impact-Driven Internships</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold gradient-text">5+</div>
-              <div className="text-sm text-muted-foreground">Projects Completed</div>
+              <div className="text-3xl font-bold gradient-text">3</div>
+              <div className="text-sm text-muted-foreground">Product Launches</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold gradient-text">100%</div>
-              <div className="text-sm text-muted-foreground">Client Satisfaction</div>
+              <div className="text-3xl font-bold gradient-text">95+</div>
+              <div className="text-sm text-muted-foreground">Content Pieces Created</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold gradient-text">12.5%</div>
+              <div className="text-sm text-muted-foreground">Conversion Rate Achieved</div>
             </div>
           </div>
         </div>

@@ -75,15 +75,15 @@ export function ExperienceSection() {
             {experiences.map((exp, index) => (
               <Card 
                 key={index}
-                className="glass-card hover:shadow-elegant transition-all duration-500 animate-fade-in-up"
+                className="glass-card hover:shadow-elegant transition-all duration-500 animate-fade-in-up group hover:scale-[1.01]"
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
                 <CardHeader>
                   <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                     <div>
-                      <CardTitle className="text-2xl gradient-text">{exp.title}</CardTitle>
+                      <CardTitle className="text-2xl gradient-text group-hover:scale-105 transition-transform duration-300">{exp.title}</CardTitle>
                       <div className="flex items-center gap-4 mt-2">
-                        <p className="text-xl font-semibold text-foreground">{exp.company}</p>
+                        <p className="text-xl font-semibold text-foreground group-hover:text-brand-primary transition-colors duration-300">{exp.company}</p>
                         <Badge variant="outline">{exp.type}</Badge>
                       </div>
                       <div className="flex items-center gap-6 mt-2 text-muted-foreground">

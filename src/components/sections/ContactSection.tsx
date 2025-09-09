@@ -10,14 +10,14 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "shubh.madhyan@example.com",
-    href: "mailto:shubh.madhyan@example.com"
+    value: "madhyanshubh@gmail.com",
+    href: "mailto:madhyanshubh@gmail.com"
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "+91 98765 43210",
-    href: "tel:+919876543210"
+    value: "+91-9509944775",
+    href: "tel:+919509944775"
   },
   {
     icon: MapPin,
@@ -95,8 +95,8 @@ export function ContactSection() {
             Let's <span className="gradient-text">Connect</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            I'm always excited to discuss new opportunities, collaborate on interesting projects, 
-            or simply chat about product management and growth strategies.
+            Ready to discuss product opportunities, share insights, or explore how we can create 
+            impactful user experiences together. Let's build something amazing!
           </p>
         </div>
 
@@ -107,13 +107,50 @@ export function ContactSection() {
               <CardHeader>
                 <CardTitle className="text-2xl flex items-center gap-3">
                   <Send className="h-6 w-6 text-brand-primary" />
-                  Send me a message
+                  Let's Start a Conversation
                 </CardTitle>
                 <p className="text-muted-foreground">
-                  Fill out the form below and I'll get back to you within 24 hours.
+                  Whether it's about product opportunities, case study walkthroughs, or collaboration ideas.
                 </p>
               </CardHeader>
               <CardContent>
+                {/* Quick Action Buttons */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="glass-card hover:bg-accent/20 transition-all duration-300 text-xs"
+                    onClick={() => setFormData(prev => ({ 
+                      ...prev, 
+                      message: "I'd love to discuss product opportunities and how your experience could benefit our team." 
+                    }))}
+                  >
+                    💼 Product Opportunities
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="glass-card hover:bg-accent/20 transition-all duration-300 text-xs"
+                    onClick={() => setFormData(prev => ({ 
+                      ...prev, 
+                      message: "I'd like to schedule a portfolio walkthrough to learn more about your product management approach." 
+                    }))}
+                  >
+                    📋 Portfolio Walkthrough
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="glass-card hover:bg-accent/20 transition-all duration-300 text-xs"
+                    onClick={() => setFormData(prev => ({ 
+                      ...prev, 
+                      message: "I'm interested in reviewing your case studies and discussing your product methodology." 
+                    }))}
+                  >
+                    📊 Case Studies
+                  </Button>
+                </div>
+                
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
@@ -158,7 +195,7 @@ export function ContactSection() {
                       required
                       value={formData.message}
                       onChange={handleInputChange}
-                      placeholder="Tell me about your project, opportunity, or just say hello..."
+                      placeholder="Tell me about your product opportunity, project idea, or just say hello..."
                       rows={6}
                       className="glass-card border-border/50 focus:border-brand-primary resize-none"
                     />
