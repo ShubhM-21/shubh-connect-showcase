@@ -65,16 +65,13 @@ export function Navigation() {
               key={item.id}
               variant="ghost"
               onClick={() => scrollToSection(item.id)}
-              className={`relative w-full h-12 rounded-xl transition-all duration-300 hover:bg-accent/20 ${
+              className={`relative w-full h-12 rounded-xl transition-all duration-300 ${
                 isExpanded ? "justify-start pl-4" : "justify-center"
               } ${
                 isActive 
-                  ? "bg-primary text-primary-foreground" 
-                  : ""
+                  ? "bg-primary text-primary-foreground shadow-md" 
+                  : "hover:bg-accent/20 hover:scale-105"
               } ${isExpanded ? "" : "w-12 px-0"}`}
-              style={{
-                transform: isActive ? 'none' : 'none'
-              }}
             >
               <Icon className="h-5 w-5 flex-shrink-0" />
               
