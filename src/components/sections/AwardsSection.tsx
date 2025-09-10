@@ -168,7 +168,7 @@ export function AwardsSection() {
                     <div className="text-xs text-muted-foreground">Major Recognitions</div>
                   </div>
                   <div className="text-center p-4 bg-gradient-to-br from-brand-green/20 to-brand-sage/20 rounded-lg">
-                    <div className="text-2xl font-bold gradient-text">7.16</div>
+                    <div className="text-2xl font-bold gradient-text">8.7</div>
                     <div className="text-xs text-muted-foreground">CGPA Score</div>
                   </div>
                   <div className="text-center p-4 bg-gradient-to-br from-brand-primary/20 to-brand-green/20 rounded-lg">
