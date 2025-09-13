@@ -192,6 +192,7 @@ export function ContactSection() {
                       placeholder="Tell me about your product opportunity, project idea, or just say hello..."
                       rows={6}
                       className="glass-card border-border/50 focus:border-brand-primary resize-none"
+                      disabled={isSubmitting}
                     />
                   </div>
 
@@ -207,7 +208,9 @@ export function ContactSection() {
                         Sending...
                       </div>
                     ) : (
+                      disabled={isSubmitting}
                       <div className="flex items-center gap-2">
+                    disabled={isSubmitting}
                         <Send className="h-5 w-5" />
                         Send Message
                       </div>
