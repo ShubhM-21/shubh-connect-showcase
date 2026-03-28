@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Home, User, Briefcase, Award, Mail, FolderOpen } from "lucide-react";
+import { Chrome as Home, User, Briefcase, Award, Mail, FolderOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -47,34 +47,35 @@ export function Navigation() {
   };
 
   return (
-    <nav 
-      className={`fixed left-6 top-1/2 -translate-y-1/2 z-50 transition-all duration-500 ${
+    <nav
+      className={`fixed left-6 z-50 transition-all duration-500 ${
         isScrolled ? "glass-card shadow-elegant" : "bg-transparent"
       } ${isExpanded ? "w-48" : "w-16"}`}
+      style={{ position: 'fixed', top: '50%', transform: 'translateY(-50%)' }}
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}
     >
-      <div className="flex flex-col items-start space-y-2 p-4">
+      <div className="flex flex-col items-center space-y-2 p-4">
         {/* Navigation Items */}
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeSection === item.id;
-          
+
           return (
             <Button
               key={item.id}
               variant="ghost"
               onClick={() => scrollToSection(item.id)}
-              className={`relative w-full h-12 rounded-xl transition-all duration-300 ${
-                isExpanded ? "justify-start pl-4" : "justify-center"
+              className={`relative h-12 rounded-xl transition-all duration-300 flex items-center ${
+                isExpanded ? "w-full justify-start pl-4" : "w-12 justify-center px-0"
               } ${
-                isActive 
-                  ? "bg-primary text-primary-foreground shadow-md" 
+                isActive
+                  ? "bg-primary text-primary-foreground shadow-md"
                   : "hover:bg-accent/20 hover:scale-105"
-              } ${isExpanded ? "" : "w-12 px-0"}`}
+              }`}
             >
               <Icon className="h-5 w-5 flex-shrink-0" />
-              
+
               {/* Expanded Text */}
               <span className={`ml-3 whitespace-nowrap transition-all duration-300 ${
                 isExpanded ? "opacity-100 w-auto" : "opacity-0 w-0 overflow-hidden"
@@ -84,10 +85,10 @@ export function Navigation() {
             </Button>
           );
         })}
-        
+
         {/* Divider */}
-        <div className="w-8 h-px bg-border my-2" />
-        
+        <div className={`h-px bg-border my-2 ${isExpanded ? "w-full" : "w-8"}`} />
+
         {/* Theme Toggle */}
         <div className={`${isExpanded ? "w-full" : "w-12 flex justify-center"} transition-all duration-300`}>
           <ThemeToggle expanded={isExpanded} />

@@ -102,37 +102,44 @@ export function HeroSection() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               onClick={scrollToProjects}
               className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-elegant hover:shadow-glow transition-all duration-300 group"
             >
               View My Work
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               variant="outline"
               className="glass-card hover:bg-accent/20 transition-all duration-300"
+              asChild
             >
-              <Download className="mr-2 h-5 w-5" />
-              Download Resume
+              <a
+                href="https://drive.google.com/uc?export=download&id=1OBBFYFDmX1dWhYqO5Em-r9-DHONeov2r"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Download className="mr-2 h-5 w-5" />
+                Download Resume
+              </a>
             </Button>
           </div>
 
           {/* Stats */}
-          <div className="flex flex-wrap gap-8 pt-8 border-t border-border/50">
+          <div className="flex justify-evenly items-center gap-8 pt-8 border-t border-border/50">
             <div className="text-center">
               <div className="text-3xl font-bold gradient-text">1+</div>
-              <div className="text-sm text-muted-foreground">Years of Impact-Driven Internships</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold gradient-text">3</div>
-              <div className="text-sm text-muted-foreground">Product Launches/Improvements</div>
+              <div className="text-sm text-muted-foreground">Year of Impact-Driven Experience</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold gradient-text">3</div>
               <div className="text-sm text-muted-foreground">Major Recognitions</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold gradient-text">3</div>
+              <div className="text-sm text-muted-foreground">Product Launches/Improvements</div>
             </div>
           </div>
         </div>
@@ -143,18 +150,14 @@ export function HeroSection() {
             {/* Decorative Elements */}
             <div className="absolute -top-4 -left-4 w-72 h-72 bg-gradient-to-br from-brand-green/20 to-brand-primary/20 rounded-3xl blur-3xl animate-float" />
             <div className="absolute -bottom-4 -right-4 w-64 h-64 bg-gradient-to-tl from-brand-sage/20 to-brand-light/20 rounded-full blur-2xl animate-float" style={{ animationDelay: "2s" }} />
-            
+
             {/* Profile Image Container */}
             <div className="relative w-80 h-96 rounded-3xl overflow-hidden shadow-elegant">
-              <div className="w-full h-full bg-gradient-to-br from-brand-sage to-brand-primary flex items-center justify-center">
-                <div className="text-6xl font-bold text-white/20">SM</div>
-              </div>
-              {/* Uncomment when portrait.jpg is available */}
-              {/* <img 
-                src="/portrait.jpg" 
+              <img
+                src="https://drive.google.com/uc?export=view&id=1PcReQHtCK4lWQ1ETadl82Go9Ny224eDH"
                 alt="Shubh Madhyan"
-                className="w-full h-full object-cover"
-              /> */}
+                className="w-full h-full object-cover object-[center_top]"
+              />
             </div>
           </div>
         </div>
