@@ -48,8 +48,10 @@ export function Navigation() {
 
   return (
     <nav
-      className={`fixed left-6 z-50 transition-all duration-500 ${
-        isScrolled ? "glass-card shadow-elegant" : "bg-transparent"
+      className={`fixed left-6 z-50 transition-all duration-500 rounded-2xl border ${
+        isExpanded || isScrolled 
+          ? "bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-white/20 dark:border-white/10 shadow-elegant" 
+          : "bg-transparent border-transparent"
       } ${isExpanded ? "w-48" : "w-16"}`}
       style={{ position: 'fixed', top: '50%', transform: 'translateY(-50%)' }}
       onMouseEnter={() => setIsExpanded(true)}

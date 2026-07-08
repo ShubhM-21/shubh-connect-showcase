@@ -37,7 +37,7 @@ const projects: Project[] = [
     impact: "Potential to capture 15% of India's talent discovery market, estimated $2B opportunity",
     techStack: ["Talent Strategy", "Branding", "Go-To-Market"],
     pdfLink: "https://drive.google.com/file/d/1seIR9Hlt09B_fOLKH5CaID3qiZcB0LXo/view?usp=sharing",
-    imageUrl: "https://drive.google.com/uc?export=view&id=1FYuB79B19IQPHwuiLzzXvrSJTvFhRht0",
+    imageUrl: "/Images/Flipkart.jpg",
     featured: true,
   },
   {
@@ -51,7 +51,7 @@ const projects: Project[] = [
     impact: "Identified $5B addressable market with clear path to 3% market share within 3 years",
     techStack: ["Market Research", "MVP Design", "Competitive Analysis"],
     pdfLink: "https://drive.google.com/file/d/1wSz71yZohK4HycZStHTEdupcGMih9_BH/view?usp=sharing",
-    imageUrl: "https://drive.google.com/uc?export=view&id=1uc1D7uTQz10e2sTuOKnGhF7CD-w6iT61",
+    imageUrl: "/Images/MoveInSync.jpg",
     featured: true,
   },
   {
@@ -65,7 +65,7 @@ const projects: Project[] = [
     impact: "Projected 40% improvement in team productivity and 60% reduction in task management overhead",
     techStack: ["AI Integration", "Workflow Automation", "User Research"],
     pdfLink: "https://drive.google.com/file/d/1DVDUBlTd9LZQvg6HXrjSjlzTRm0pRxaS/view?usp=sharing",
-    imageUrl: "https://drive.google.com/uc?export=view&id=1pLXRkSPaEvNPPq4DIhDIKjNm1FR8HeVz",
+    imageUrl: "/Images/Ema.jpg",
     featured: true,
   },
   {
@@ -79,7 +79,7 @@ const projects: Project[] = [
     impact: "Potential to improve hotel operational efficiency by 35% and guest satisfaction scores by 25%",
     techStack: ["Hospitality Tech", "User Interviews", "Competitive Analysis"],
     pdfLink: "https://drive.google.com/file/d/1XPF0jWuLNduOHhMZnAu-EBBPSpmmzF3l/view?usp=sharing",
-    imageUrl: "https://drive.google.com/uc?export=view&id=1QMMe_zQLItbEuB3ao1cemKt5H86ZP1t0",
+    imageUrl: "/Images/UnifyApp.jpg",
     featured: false,
   },
   // PRDs
@@ -94,7 +94,6 @@ const projects: Project[] = [
     impact: "50% reduction in QA setup time, 30% improvement in test coverage, 25% faster release cycles",
     techStack: ["QA Automation", "Config Management", "Scalability"],
     pdfLink: "https://drive.google.com/file/d/133-kXPDEQxrL_j0NwDpmTM5GIOdUEbQN/view?usp=sharing",
-    imageUrl: "https://drive.google.com/uc?export=view&id=13Orp7b5o38nqLqi6aVQsGNna22z0_qW_",
     featured: true,
   },
   {
@@ -108,7 +107,6 @@ const projects: Project[] = [
     impact: "Projected 45% reduction in procurement time, 30% cost savings on SaaS spending, improved vendor relationship management",
     techStack: ["SaaS Procurement", "Marketplace Design", "Vendor Management"],
     pdfLink: "https://drive.google.com/file/d/1Fn5JQS36zsh0qWGnnNfdGqqP3Nh6upGG/view?usp=sharing",
-    imageUrl: "https://drive.google.com/uc?export=view&id=1cDGir_Sj0KJbAMVz7LR4RzO_fB99B6C7",
     featured: true,
   },
   // Analytics Projects

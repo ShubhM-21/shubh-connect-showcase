@@ -1,5 +1,6 @@
 import { ArrowRight, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { RESUME_PATH } from "@/lib/siteConfig";
 
 export function HeroSection() {
   const scrollToProjects = () => {
@@ -117,7 +118,8 @@ export function HeroSection() {
               asChild
             >
               <a
-                href="https://drive.google.com/uc?export=download&id=1OBBFYFDmX1dWhYqO5Em-r9-DHONeov2r"
+                href={RESUME_PATH}
+                download
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -154,7 +156,7 @@ export function HeroSection() {
             {/* Profile Image Container */}
             <div className="relative w-80 h-96 rounded-3xl overflow-hidden shadow-elegant">
               <img
-                src="https://drive.google.com/uc?export=view&id=1PcReQHtCK4lWQ1ETadl82Go9Ny224eDH"
+                src="/Images/HomepageImg.png"
                 alt="Shubh Madhyan"
                 className="w-full h-full object-cover object-[center_top]"
               />

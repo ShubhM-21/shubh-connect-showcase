@@ -1,13 +1,32 @@
-import { Calendar, MapPin, TrendingUp, Users, Database, Target } from "lucide-react";
+import { Calendar, MapPin, TrendingUp, Users, Database, Target, ChevronUp, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 const experiences = [
   {
+    title: "Associate Product Manager",
+    company: "The Sleep Company",
+    location: "Mumbai, India",
+    period: "Feb 2026 - Jun 2026",
+
+    type: "Full-time",
+    description: "Leading product optimization initiatives across the primary funnel, focusing on conversion rate optimization, SEO/AEO enhancements, and driving omni-channel growth.",
+    responsibilities: [
+      "Increased lead captures by 12% by refining recommender CTAs and deploying targeted city-based pop-up nudges, driving ₹14.7L+ in revenue within one month.",
+      "Expanded delivery and installation APIs to support a generic restricted-category framework (e.g., sofas, desks), successfully transitioning specific SKUs from free to tiered monetization models.",
+      "Implemented SEO and GEO optimization strategies to improve search discoverability and AI-engine visibility, driving 22% organic and 19% AI-engine traffic growth within two months.",
+      "Ran A/B tests on key action buttons to improve clickability and streamline user interactions, increasing clicks by 45%."
+    ],
+    technologies: ["A/B Testing", "SEO/AEO", "CRO", "Product Strategy", "Analytics"],
+    image: "/Images/TSC Logo.jpg",
+  },
+  {
     title: "Program Manager Intern (Founder's Office)",
     company: "Niyo Solutions",
     location: "Bangalore, India",
-    period: "May 2025 - Present",
+    period: "May 2025 - Oct 2025",
     type: "Internship",
     description: "Leading end-to-end remittance funnel optimization and partner integrations to drive adoption and improve user experience in the fintech space.",
     responsibilities: [
@@ -22,7 +41,8 @@ const experiences = [
       "Improved remittance funnel conversion rates through systematic optimization",
       "Reduced KYC verification turnaround time significantly",
       "Built comprehensive P&L models for sustainable growth"
-    ]
+    ],
+    image: "/Images/Niyo logo.png",
   },
   {
     title: "Product Intern",
@@ -43,7 +63,8 @@ const experiences = [
       "Increased creator platform engagement by 40%",
       "Reduced onboarding time from 15 to 8 minutes",
       "Led cross-functional team of 8 members"
-    ]
+    ],
+    image: "/Images/Rigi logo.webp",
   },
   {
     title: "Product & Growth Intern",
@@ -76,6 +97,11 @@ const skills = [
 ];
 
 export function ExperienceSection() {
+  const [showAllExperiences, setShowAllExperiences] = useState(false);
+
+  const displayedExperiences = showAllExperiences ? experiences : experiences.slice(0, 2);
+  const hasMoreExperiences = experiences.length > 2;
+
   return (
     <section id="experience" className="py-12 px-6 lg:px-12 bg-muted/30">
       <div className="container mx-auto px-6">
@@ -93,7 +119,7 @@ export function ExperienceSection() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Experience Timeline */}
           <div className="lg:col-span-2 space-y-8">
-            {experiences.map((exp, index) => (
+            {displayedExperiences.map((exp, index) => (
               <Card 
                 key={index}
                 className="glass-card hover:shadow-elegant transition-all duration-500 animate-fade-in-up group hover:scale-[1.01]"
@@ -120,10 +146,14 @@ export function ExperienceSection() {
                     </div>
                     
                     {/* Company Logo Placeholder */}
-                    <div className="w-16 h-16 bg-gradient-to-br from-brand-sage to-brand-primary rounded-xl flex items-center justify-center">
-                      <span className="text-white font-bold text-lg">
-                        {exp.company.charAt(0)}
-                      </span>
+                    <div className="w-16 h-16 bg-gradient-to-br from-brand-sage to-brand-primary rounded-xl flex items-center justify-center overflow-hidden">
+                      {exp.image ? (
+                        <img src={exp.image} alt={`${exp.company} logo`} className="w-full h-full object-cover" />
+                      ) : (
+                        <span className="text-white font-bold text-lg">
+                          {exp.company.charAt(0)}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </CardHeader>
@@ -161,20 +191,45 @@ export function ExperienceSection() {
                   </div>
 
                   {/* Key Achievements */}
-                  <div className="bg-brand-green/10 p-4 rounded-lg border border-brand-green/20">
-                    <h4 className="font-semibold mb-3 text-brand-dark">Key Achievements:</h4>
-                    <ul className="space-y-1">
-                      {exp.achievements.map((achievement, idx) => (
-                        <li key={idx} className="flex items-center gap-2">
-                          <TrendingUp className="h-4 w-4 text-brand-primary flex-shrink-0" />
-                          <span className="text-sm text-brand-dark">{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  {exp.achievements && (
+                    <div className="bg-brand-green/10 p-4 rounded-lg border border-brand-green/20">
+                      <h4 className="font-semibold mb-3 text-brand-dark">Key Achievements:</h4>
+                      <ul className="space-y-1">
+                        {exp.achievements.map((achievement, idx) => (
+                          <li key={idx} className="flex items-center gap-2">
+                            <TrendingUp className="h-4 w-4 text-brand-primary flex-shrink-0" />
+                            <span className="text-sm text-brand-dark">{achievement}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ))}
+
+            {hasMoreExperiences && (
+              <div className="text-center mt-8">
+                <Button
+                  onClick={() => setShowAllExperiences(!showAllExperiences)}
+                  variant="outline"
+                  size="lg"
+                  className="glass-card hover:bg-accent/20 transition-all duration-300 px-8"
+                >
+                  {showAllExperiences ? (
+                    <>
+                      <ChevronUp className="mr-2 h-5 w-5" />
+                      Show Less
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown className="mr-2 h-5 w-5" />
+                      See More Experiences ({experiences.length - 2} more)
+                    </>
+                  )}
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Skills Sidebar */}
@@ -210,23 +265,62 @@ export function ExperienceSection() {
               </CardContent>
             </Card>
 
-            {/* Quick Stats */}
+            {/* Journey Timeline */}
             <Card className="glass-card animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
               <CardHeader>
-                <CardTitle className="text-xl">Impact Summary</CardTitle>
+                <CardTitle className="text-xl">Journey Timeline</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-center p-4 bg-gradient-to-br from-brand-sage/20 to-brand-primary/20 rounded-lg">
-                  <div className="text-3xl font-bold gradient-text">60%</div>
-                  <div className="text-sm text-muted-foreground">Avg. Improvement</div>
-                </div>
-                <div className="text-center p-4 bg-gradient-to-br from-brand-green/20 to-brand-sage/20 rounded-lg">
-                  <div className="text-3xl font-bold gradient-text">8+</div>
-                  <div className="text-sm text-muted-foreground">Team Members Led</div>
-                </div>
-                <div className="text-center p-4 bg-gradient-to-br from-brand-primary/20 to-brand-green/20 rounded-lg">
-                  <div className="text-3xl font-bold gradient-text">100+</div>
-                  <div className="text-sm text-muted-foreground">Users Interviewed</div>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">26</span>
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">Product Management</p>
+                      <p className="text-xs text-muted-foreground">The Sleep Company</p>
+                    </div>
+                  </div>
+                  <div className="ml-4 h-6 w-px bg-border" />
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-brand-green rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">25</span>
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">Graduation & Program Management</p>
+                      <p className="text-xs text-muted-foreground">BITS Pilani Goa & Niyo Solutions</p>
+                    </div>
+                  </div>
+                  <div className="ml-4 h-6 w-px bg-border" />
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">24</span>
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">Product Management</p>
+                      <p className="text-xs text-muted-foreground">Rigi & NextLeap</p>
+                    </div>
+                  </div>
+                  <div className="ml-4 h-6 w-px bg-border" />
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-brand-green rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">23</span>
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">Growth & Analytics</p>
+                      <p className="text-xs text-muted-foreground">Dunlin (SaaSDen)</p>
+                    </div>
+                  </div>
+                  <div className="ml-4 h-6 w-px bg-border" />
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-brand-sage rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">21</span>
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">Academic Excellence</p>
+                      <p className="text-xs text-muted-foreground">BITS Pilani Goa</p>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>

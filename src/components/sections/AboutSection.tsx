@@ -39,11 +39,11 @@ export function AboutSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
           {/* Left Column - Bio & Goals */}
-          <div className="space-y-8 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+          <div className="flex flex-col h-full space-y-6 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
             <div className="space-y-6">
-              <h3 className="text-2xl font-semibold flex items-center gap-3">
+              <h3 className="text-2xl font-semibold flex items-center gap-3 mb-6">
                 <Target className="h-6 w-6 text-brand-primary" />
                 My Mission
               </h3>
@@ -60,7 +60,7 @@ export function AboutSection() {
             </div>
 
             {/* Skills Grid */}
-            <div className="space-y-6">
+            <div className="space-y-6 mt-auto">
               <h3 className="text-2xl font-semibold">Core Competencies</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {skills.map((skill, index) => {
@@ -92,14 +92,14 @@ export function AboutSection() {
           </div>
 
           {/* Right Column - Education & Visual */}
-          <div className="space-y-8 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
+          <div className="flex flex-col h-full space-y-6 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
             {/* Education */}
             <div className="space-y-6">
-              <h3 className="text-2xl font-semibold flex items-center gap-3">
+              <h3 className="text-2xl font-semibold flex items-center gap-3 mb-6">
                 <GraduationCap className="h-6 w-6 text-brand-primary" />
                 Education
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {education.map((edu, index) => (
                   <Card key={index} className="glass-card hover:shadow-card transition-all duration-300">
                     <CardContent className="p-6">
@@ -122,23 +122,16 @@ export function AboutSection() {
               </div>
             </div>
 
-            {/* Workspace Image Placeholder */}
-            <Card className="glass-card overflow-hidden">
-              <div className="aspect-video bg-gradient-to-br from-brand-sage/20 to-brand-primary/20 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-brand-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Users className="h-8 w-8 text-brand-primary" />
-                  </div>
-                  <p className="text-muted-foreground">Workspace Image</p>
-                </div>
-              </div>
-              {/* Uncomment when workspace.jpg is available */}
-              {/* <img 
-                src="/workspace.jpg" 
-                alt="Workspace"
-                className="w-full h-full object-cover"
-              /> */}
-            </Card>
+            {/* Workspace Image */}
+            <div className="mt-auto">
+              <Card className="glass-card overflow-hidden">
+                <img 
+                  src="/Images/AboutSec.png" 
+                  alt="My Workspace"
+                  className="w-full h-auto rounded-xl object-cover shadow-lg"
+                />
+              </Card>
+            </div>
           </div>
         </div>
       </div>

@@ -3,9 +3,11 @@ import { SocialLinks } from "@/components/SocialLinks";
 import { ScrollBlurWrapper } from "@/components/ScrollBlurWrapper";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
+import { SkillsSection } from "@/components/sections/SkillsSection";
 import { FeaturedProjectsSection } from "@/components/sections/FeaturedProjectsSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { AwardsSection } from "@/components/sections/AwardsSection";
+import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 
 const Index = () => {

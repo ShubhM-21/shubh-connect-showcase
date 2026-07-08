@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Send, MapPin, Mail, Phone, Download, Linkedin, Github, Twitter, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { RESUME_PATH } from "@/lib/siteConfig";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -54,7 +55,6 @@ export function ContactSection() {
     email: "",
     message: ""
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -63,21 +63,6 @@ export function ContactSection() {
       ...prev,
       [name]: value
     }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate form submission
-    setTimeout(() => {
-      toast({
-        title: "Message sent successfully!",
-        description: "I'll get back to you as soon as possible.",
-      });
-      setFormData({ name: "", email: "", message: "" });
-      setIsSubmitting(false);
-    }, 1000);
   };
 
   return (
@@ -96,8 +81,8 @@ export function ContactSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <Card className="glass-card animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+          <div className="lg:col-span-2 h-full">
+            <Card className="glass-card animate-fade-in-up h-full" style={{ animationDelay: "0.2s" }}>
               <CardHeader>
                 <CardTitle className="text-2xl flex items-center gap-3">
                   <Send className="h-6 w-6 text-brand-primary" />
@@ -116,7 +101,7 @@ export function ContactSection() {
                     className="glass-card hover:bg-accent/20 transition-all duration-300 text-xs"
                     onClick={() => setFormData(prev => ({ 
                       ...prev, 
-                      message: "I'd love to discuss product opportunities and how your experience could benefit our team." 
+                      message: "I have a product opportunity I'd like to discuss with you." 
                     }))}
                   >
                     💼 Product Opportunities
@@ -127,7 +112,7 @@ export function ContactSection() {
                     className="glass-card hover:bg-accent/20 transition-all duration-300 text-xs"
                     onClick={() => setFormData(prev => ({ 
                       ...prev, 
-                      message: "I'd like to schedule a portfolio walkthrough to learn more about your product management approach." 
+                      message: "I'd love to schedule a time for a detailed portfolio walkthrough." 
                     }))}
                   >
                     📋 Portfolio Walkthrough
@@ -138,14 +123,15 @@ export function ContactSection() {
                     className="glass-card hover:bg-accent/20 transition-all duration-300 text-xs"
                     onClick={() => setFormData(prev => ({ 
                       ...prev, 
-                      message: "I'm interested in reviewing your case studies and discussing your product methodology." 
+                      message: "I'm interested in learning more about your specific case studies." 
                     }))}
                   >
                     📊 Case Studies
                   </Button>
                 </div>
                 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form action="https://api.web3forms.com/submit" method="POST" className="space-y-6">
+                  <input type="hidden" name="access_key" value="8e5a6cd3-7d5d-4041-a466-5cfe8881e020" />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-sm font-medium">
@@ -192,27 +178,18 @@ export function ContactSection() {
                       placeholder="Tell me about your product opportunity, project idea, or just say hello..."
                       rows={6}
                       className="glass-card border-border/50 focus:border-brand-primary resize-none"
-                      disabled={isSubmitting}
                     />
                   </div>
 
                   <Button 
                     type="submit" 
                     size="lg"
-                    disabled={isSubmitting}
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-elegant hover:shadow-glow transition-all duration-300"
                   >
-                    {isSubmitting ? (
-                      <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Sending...
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-2">
-                        <Send className="h-5 w-5" />
-                        Send Message
-                      </div>
-                    )}
+                    <div className="flex items-center gap-2">
+                      <Send className="h-5 w-5" />
+                      Send Message
+                    </div>
                   </Button>
                 </form>
               </CardContent>
@@ -268,47 +245,24 @@ export function ContactSection() {
                     <Button 
                       variant="outline" 
                       className="glass-card hover:bg-accent/20 transition-all duration-300 w-full"
+                      asChild
                     >
-                      <Download className="mr-2 h-4 w-4" />
-                      Download CV
+                      <a 
+                        href={RESUME_PATH} 
+                        download 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                      >
+                        <Download className="mr-2 h-4 w-4" />
+                        Download CV
+                      </a>
                     </Button>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Social Links */}
-            <Card className="glass-card animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
-              <CardHeader>
-                <CardTitle className="text-xl">Follow Me</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-3">
-                  {socialLinks.map((social, index) => {
-                    const Icon = social.icon;
-                    return (
-                      <Button
-                        key={index}
-                        variant="outline"
-                        size="sm"
-                        asChild
-                        className="glass-card hover:bg-accent/20 transition-all duration-300 group"
-                      >
-                        <a 
-                          href={social.href} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2"
-                        >
-                          <Icon className={`h-4 w-4 ${social.color}`} />
-                          <span className="text-sm">{social.label}</span>
-                        </a>
-                      </Button>
-                    );
-                  })}
-                </div>
-              </CardContent>
-            </Card>
+
           </div>
         </div>
 

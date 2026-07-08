@@ -1,8 +1,40 @@
+"use client";
+
 import { Trophy, Award, Star, GraduationCap, Users, TrendingUp } from "lucide-react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 const achievements = [
+  {
+    title: "HackFast Hackathon — 1st Place",
+    organization: "Niyo Solutions",
+    year: "2025",
+    type: "Recognition",
+    description: "Won 1st place at Niyo's internal HackFast Hackathon by building an AI-powered Travel Itinerary Calculator that consolidates flights, stays, transport, activities, and forex costs into a single intuitive platform — solving real travel pain points within a 24-hour sprint.",
+    icon: Trophy,
+    details: [
+      "Won 1st place among competing teams, securing ₹1,00,000 in prize money",
+      "Built a fully working prototype within 24 hours",
+      "Integrated multiple free APIs for live travel, pricing, and currency data",
+      "Delivered real-time trip cost analysis and personalised forex cash recommendations"
+    ],
+    prototypeLink: "https://v0-trip-planner-ui.vercel.app/"
+  },
+
+  {
+    title: "Flipkart APM Shortlist",
+    organization: "Flipkart",
+    year: "2024",
+    type: "Recognition",
+    description: "Selected among the top 95 candidates from 2,500+ submissions for Flipkart's Associate Product Manager program, competing against participants from 7 IITs and 3 BITS campuses.",
+    icon: Star,
+    details: [
+      "Top 95 out of 2,500+ applicants nationally",
+      "Competed against candidates from 7 IITs and 3 BITS campuses",
+      "Shortlisted for one of India's most competitive APM programs"
+    ]
+  },
   {
     title: "Product Management Cohort Completion",
     organization: "NextLeap",
@@ -14,45 +46,6 @@ const achievements = [
       "Top 10% performance in cohort",
       "Led 3 product case studies",
       "Mentored junior cohort members"
-    ]
-  },
-  {
-    title: "Best Product Innovation Award",
-    organization: "Rigi",
-    year: "2024",
-    type: "Recognition",
-    description: "Recognized for developing innovative creator analytics dashboard that significantly improved platform engagement.",
-    icon: Trophy,
-    details: [
-      "25% increase in creator retention",
-      "40% improvement in feature adoption",
-      "Cross-functional team leadership"
-    ]
-  },
-  {
-    title: "Growth Champion",
-    organization: "Dunlin (SaaSDen)",
-    year: "2023",
-    type: "Achievement",
-    description: "Awarded for exceptional performance in user activation and onboarding optimization initiatives.",
-    icon: TrendingUp,
-    details: [
-      "35% improvement in activation rates",
-      "50% reduction in onboarding time",
-      "Data-driven decision making"
-    ]
-  },
-  {
-    title: "Dean's List",
-    organization: "BITS Pilani Goa",
-    year: "2023",
-    type: "Academic",
-    description: "Recognized for academic excellence in Electrical & Electronics Engineering with Finance Minor.",
-    icon: Star,
-    details: [
-      "Top 5% of the class",
-      "GPA: 8.7/10",
-      "Finance specialization with honors"
     ]
   },
   {
@@ -79,6 +72,9 @@ const certifications = [
 ];
 
 export function AwardsSection() {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const visibleAwards = isExpanded ? achievements : achievements.slice(0, 2);
+
   return (
     <section id="awards" className="py-12 px-6 lg:px-12">
       <div className="container mx-auto px-6">
@@ -96,7 +92,7 @@ export function AwardsSection() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Awards Timeline */}
           <div className="lg:col-span-2 space-y-6">
-            {achievements.map((achievement, index) => {
+            {visibleAwards.map((achievement, index) => {
               const Icon = achievement.icon;
               return (
                 <Card 
@@ -110,6 +106,7 @@ export function AwardsSection() {
                       <div className="p-3 bg-gradient-to-br from-brand-primary to-brand-green rounded-xl">
                         <Icon className="h-6 w-6 text-white" />
                       </div>
+                    
                       
                       <div className="flex-1">
                         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2">
@@ -149,39 +146,33 @@ export function AwardsSection() {
                 </Card>
               );
             })}
+
+            {achievements.length > 2 && (
+              <div className="flex justify-center mt-6">
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className="flex items-center justify-center gap-2 px-6 py-3 border border-[#333] bg-transparent text-gray-300 rounded-lg text-sm font-medium hover:bg-white/5 transition-colors"
+                >
+                  <span>
+                    {isExpanded
+                      ? "Show Less"
+                      : `See More Awards (${achievements.length - 2} more)`}
+                  </span>
+                  <svg
+                    className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Sidebar */}
           <div className="space-y-8">
-            {/* Quick Stats */}
-            <Card className="glass-card animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-              <CardHeader>
-                <CardTitle className="text-xl flex items-center gap-2">
-                  <Trophy className="h-5 w-5 text-brand-primary" />
-                  Achievement Stats
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center p-4 bg-gradient-to-br from-brand-sage/20 to-brand-primary/20 rounded-lg">
-                    <div className="text-2xl font-bold gradient-text">3</div>
-                    <div className="text-xs text-muted-foreground">Major Recognitions</div>
-                  </div>
-                  <div className="text-center p-4 bg-gradient-to-br from-brand-green/20 to-brand-sage/20 rounded-lg">
-                    <div className="text-2xl font-bold gradient-text">8.7</div>
-                    <div className="text-xs text-muted-foreground">CGPA Score</div>
-                  </div>
-                  <div className="text-center p-4 bg-gradient-to-br from-brand-primary/20 to-brand-green/20 rounded-lg">
-                    <div className="text-2xl font-bold gradient-text">25+</div>
-                    <div className="text-xs text-muted-foreground">Students Mentored</div>
-                  </div>
-                  <div className="text-center p-4 bg-gradient-to-br from-brand-light/40 to-brand-sage/20 rounded-lg">
-                    <div className="text-2xl font-bold gradient-text">Top 5%</div>
-                    <div className="text-xs text-muted-foreground">Class Rank</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
 
             {/* Certifications */}
             <Card className="glass-card animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
@@ -194,7 +185,7 @@ export function AwardsSection() {
               <CardContent>
                 <div className="space-y-3">
                   {certifications.map((cert, index) => (
-                    <div 
+                    <div
                       key={index}
                       className="flex items-center gap-3 p-3 bg-accent/20 rounded-lg hover:bg-accent/30 transition-colors"
                     >
@@ -202,46 +193,6 @@ export function AwardsSection() {
                       <span className="text-sm font-medium">{cert}</span>
                     </div>
                   ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Timeline Visual */}
-            <Card className="glass-card animate-fade-in-up" style={{ animationDelay: "0.7s" }}>
-              <CardHeader>
-                <CardTitle className="text-xl">Journey Timeline</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">24</span>
-                    </div>
-                    <div>
-                      <p className="font-medium text-sm">Product Management</p>
-                      <p className="text-xs text-muted-foreground">Rigi & NextLeap</p>
-                    </div>
-                  </div>
-                  <div className="ml-4 h-6 w-px bg-border" />
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-brand-green rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">23</span>
-                    </div>
-                    <div>
-                      <p className="font-medium text-sm">Growth & Analytics</p>
-                      <p className="text-xs text-muted-foreground">Dunlin (SaaSDen)</p>
-                    </div>
-                  </div>
-                  <div className="ml-4 h-6 w-px bg-border" />
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-brand-sage rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">21</span>
-                    </div>
-                    <div>
-                      <p className="font-medium text-sm">Academic Excellence</p>
-                      <p className="text-xs text-muted-foreground">BITS Pilani Goa</p>
-                    </div>
-                  </div>
                 </div>
               </CardContent>
             </Card>
