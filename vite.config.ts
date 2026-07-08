@@ -13,6 +13,8 @@ export default defineConfig(({ mode }) => {
     server: {
       host: "::",
       port: 8080,
+      // Added the host from your Vercel error message here:
+      allowedHosts: ["sb-66g1khobeeh7.vercel.run"],
     },
     plugins: [
       react(),
