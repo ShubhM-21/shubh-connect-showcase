@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { ChatWidget } from "./components/ChatWidget";
+import { Analytics } from "@vercel/analytics/react"; // 1. Added import here
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
         </Routes>
       </BrowserRouter>
       <ChatWidget />
+      <Analytics /> {/* 2. Added component here */}
     </TooltipProvider>
   </QueryClientProvider>
 );
