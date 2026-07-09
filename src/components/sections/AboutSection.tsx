@@ -53,10 +53,11 @@ export function AboutSection() {
                 strategic thinking, and measurable impact.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Through impactful internships at <strong className="text-brand-primary">Rigi</strong> and <strong className="text-brand-primary">Dunlin (SaaSDen)</strong>, 
-                I've successfully launched products, optimized user experiences, and achieved measurable 
-                business outcomes through strategic product management.
-              </p>
+  Having recently scaled core product mechanics and omnichannel funnels at <strong className="text-brand-primary">The Sleep Company</strong>, 
+  and previously shipping critical growth features at <strong className="text-brand-primary">Niyo Solutions</strong> and <strong className="text-brand-primary">Rigi</strong>, 
+  I specialize in owning the full roadmap-to-release cycle. From expanding robust API frameworks to launching conversational commerce experiments that move core business metrics, 
+  I thrive on turning ambiguous problems into measurable business outcomes.
+</p>
             </div>
 
             {/* Skills Grid */}
