@@ -150,23 +150,25 @@ export function AwardsSection() {
             {achievements.length > 2 && (
               <div className="flex justify-center mt-6">
                 <button
-                  onClick={() => setIsExpanded(!isExpanded)}
-                  className="flex items-center justify-center gap-2 px-6 py-3 border border-[#333] bg-transparent text-gray-300 rounded-lg text-sm font-medium hover:bg-white/5 transition-colors"
-                >
-                  <span>
-                    {isExpanded
-                      ? "Show Less"
-                      : `See More Awards (${achievements.length - 2} more)`}
-                  </span>
-                  <svg
-                    className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
+  onClick={() => setIsExpanded(!isExpanded)}
+  className="flex items-center justify-center gap-2 px-6 py-2.5 border border-input bg-background text-foreground rounded-lg text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors shadow-sm"
+>
+  {/* The SVG is now moved ABOVE the text to appear on the left */}
+  <svg
+    className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+  </svg>
+  
+  <span>
+    {isExpanded
+      ? "Show Less"
+      : `See More Awards (${achievements.length - 2} more)`}
+  </span>
+</button>
               </div>
             )}
           </div>
