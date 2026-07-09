@@ -126,11 +126,21 @@ export function AboutSection() {
             {/* Workspace Image */}
             <div className="mt-auto">
               <Card className="glass-card overflow-hidden">
+                
+                {/* 1. LIGHT MODE IMAGE: Visible normally, hidden in dark mode */}
+                <img 
+                  src="/Images/AboutSec-Light.png" 
+                  alt="My Workspace"
+                  className="block dark:hidden w-full h-auto rounded-xl object-cover shadow-lg"
+                />
+                
+                {/* 2. DARK MODE IMAGE: Hidden normally, visible in dark mode */}
                 <img 
                   src="/Images/AboutSec.png" 
                   alt="My Workspace"
-                  className="w-full h-auto rounded-xl object-cover shadow-lg"
+                  className="hidden dark:block w-full h-auto rounded-xl object-cover shadow-lg"
                 />
+
               </Card>
             </div>
           </div>
