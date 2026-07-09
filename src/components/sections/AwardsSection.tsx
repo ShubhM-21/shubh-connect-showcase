@@ -1,9 +1,10 @@
 "use client";
 
-import { Trophy, Award, Star, GraduationCap, Users, TrendingUp } from "lucide-react";
+import { Trophy, Award, Star, GraduationCap, Users, TrendingUp, ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button"; 
 
 const achievements = [
   {
@@ -149,26 +150,24 @@ export function AwardsSection() {
 
             {achievements.length > 2 && (
               <div className="flex justify-center mt-6">
-                <button
+                <Button
   onClick={() => setIsExpanded(!isExpanded)}
-  className="flex items-center justify-center gap-2 px-6 py-2.5 border border-input bg-background text-foreground rounded-lg text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors shadow-sm"
+  variant="outline"
+  size="lg"
+  className="glass-card hover:bg-accent/20 transition-all duration-300 px-8"
 >
-  {/* The SVG is now moved ABOVE the text to appear on the left */}
-  <svg
-    className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-  </svg>
-  
-  <span>
-    {isExpanded
-      ? "Show Less"
-      : `See More Awards (${achievements.length - 2} more)`}
-  </span>
-</button>
+  {isExpanded ? (
+    <>
+      <ChevronUp className="mr-2 h-5 w-5" />
+      Show Less
+    </>
+  ) : (
+    <>
+      <ChevronDown className="mr-2 h-5 w-5" />
+      See More Awards ({achievements.length - 2} more)
+    </>
+  )}
+</Button>
               </div>
             )}
           </div>
