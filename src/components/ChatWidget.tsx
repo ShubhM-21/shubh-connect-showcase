@@ -17,7 +17,14 @@ export const ChatWidget = () => {
   ]);
   const [inputText, setInputText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isBouncing, setIsBouncing] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsBouncing(false), 7000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -83,89 +90,102 @@ export const ChatWidget = () => {
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end">
-      {/* Expanded Chat Window */}
-      {isExpanded && (
-        <div className="w-80 sm:w-96 h-[30rem] bg-white dark:bg-slate-900 rounded-xl shadow-2xl flex flex-col border border-gray-200 dark:border-gray-700 mb-4">
-          {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
-            <h3 className="font-semibold text-lg text-slate-800 dark:text-white">Portfolio Assistant</h3>
-            <Button variant="ghost" size="icon" onClick={() => setIsExpanded(false)}>
-              <X className="h-5 w-5" />
-            </Button>
-          </div>
+    <div className="fixed bottom-8 right-8 z-50 flex items-center gap-3 group">
+      {/* Column: Expanded Chat Window + Floating Button row */}
+      <div className="flex flex-col items-end">
+        {/* Expanded Chat Window */}
+        {isExpanded && (
+          <div className="w-80 sm:w-96 h-[30rem] bg-white dark:bg-slate-900 rounded-xl shadow-2xl flex flex-col border border-gray-200 dark:border-gray-700 mb-4">
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="font-semibold text-lg text-slate-800 dark:text-white">Portfolio Assistant</h3>
+              <Button variant="ghost" size="icon" onClick={() => setIsExpanded(false)}>
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
 
-          {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {messages.map((msg, idx) => {
-              if (msg.role === 'assistant' && msg.text.trim() === '[SHOW_CONTACT_BUTTON]') {
+            {/* Messages Area */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+              {messages.map((msg, idx) => {
+                if (msg.role === 'assistant' && msg.text.trim() === '[SHOW_CONTACT_BUTTON]') {
+                  return (
+                    <div key={idx} className="flex justify-start mb-4">
+                      <div className="bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-slate-200 p-3 rounded-xl max-w-[85%] text-sm">
+                        <p className="mb-2">I don't have that information, but I'd love to connect with you!</p>
+                        <a
+                          href="#contact"
+                          onClick={() => {
+                            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                          }}
+                          className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                        >
+                          Go to Contact Page
+                        </a>
+                      </div>
+                    </div>
+                  );
+                }
+
                 return (
-                  <div key={idx} className="flex justify-start mb-4">
-                    <div className="bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-slate-200 p-3 rounded-xl max-w-[85%] text-sm">
-                      <p className="mb-2">I don't have that information, but I'd love to connect with you!</p>
-                      <a
-                        href="#contact"
-                        onClick={() => {
-                          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                        }}
-                        className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-                      >
-                        Go to Contact Page
-                      </a>
+                  <div key={idx} className={`flex mb-4 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div
+                      className={`p-3 rounded-xl max-w-[85%] text-sm whitespace-pre-wrap ${
+                        msg.role === 'user'
+                          ? 'bg-blue-600 text-white rounded-br-none'
+                          : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-slate-200 rounded-bl-none'
+                      }`}
+                    >
+                      {msg.text}
                     </div>
                   </div>
                 );
-              }
-
-              return (
-                <div key={idx} className={`flex mb-4 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div
-                    className={`p-3 rounded-xl max-w-[85%] text-sm whitespace-pre-wrap ${
-                      msg.role === 'user'
-                        ? 'bg-blue-600 text-white rounded-br-none'
-                        : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-slate-200 rounded-bl-none'
-                    }`}
-                  >
-                    {msg.text}
+              })}
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3">
+                    <span className="text-slate-600 dark:text-slate-300">Typing...</span>
                   </div>
                 </div>
-              );
-            })}
-            {isLoading && (
-              <div className="flex justify-start">
-                <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3">
-                  <span className="text-slate-600 dark:text-slate-300">Typing...</span>
-                </div>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+
+            {/* Input Area */}
+            <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+              <form onSubmit={handleSendMessage} className="flex gap-2">
+                <Input
+                  placeholder="Ask me about the portfolio..."
+                  value={inputText}
+                  onChange={(e) => setInputText(e.target.value)}
+                  disabled={isLoading}
+                />
+                <Button type="submit" size="icon" disabled={isLoading}>
+                  <Send className="h-5 w-5" />
+                </Button>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* Floating Button row (tooltip + button) */}
+        <div className="flex items-center gap-3">
+          {/* Hover Tooltip */}
+          <div className={`hidden md:block px-4 py-2 bg-white/90 backdrop-blur-sm text-gray-800 text-sm font-medium rounded-2xl shadow-lg border border-gray-100 transition-opacity duration-300 cursor-default ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+            Ask me anything!
           </div>
 
-          {/* Input Area */}
-          <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-            <form onSubmit={handleSendMessage} className="flex gap-2">
-              <Input
-                placeholder="Ask me about the portfolio..."
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                disabled={isLoading}
-              />
-              <Button type="submit" size="icon" disabled={isLoading}>
-                <Send className="h-5 w-5" />
-              </Button>
-            </form>
-          </div>
+          {/* Floating Button */}
+          <Button
+            size="icon"
+            className={`w-14 h-14 rounded-full shadow-2xl hover:shadow-green-500/20 transition-all duration-300 ${isBouncing ? 'animate-bounce' : ''}`}
+            onClick={() => setIsExpanded(!isExpanded)}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <MessageCircle className="h-7 w-7" />
+          </Button>
         </div>
-      )}
-
-      {/* Floating Button */}
-      <Button
-        size="icon"
-        className="w-14 h-14 rounded-full shadow-lg"
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
-        <MessageCircle className="h-7 w-7" />
-      </Button>
+      </div>
     </div>
   );
 };
