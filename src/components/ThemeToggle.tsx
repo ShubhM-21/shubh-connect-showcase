@@ -28,6 +28,7 @@ export function ThemeToggle({ expanded = false }: { expanded?: boolean }) {
       className={`glass-card hover:bg-accent/20 transition-all duration-300 ${
         expanded ? "w-full h-12 pl-4 justify-start" : "w-12 h-12 justify-center px-0"
       }`}
+      data-umami-event={`Sidebar - Theme Toggle`}
     >
       {theme === "light" ? (
         <Moon className="h-4 w-4 flex-shrink-0" />
