@@ -107,6 +107,7 @@ export function HeroSection() {
               size="lg"
               onClick={scrollToProjects}
               className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-elegant hover:shadow-glow transition-all duration-300 group"
+              data-umami-event="Hero - Clicked View My Work"
             >
               View My Work
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -122,6 +123,7 @@ export function HeroSection() {
                 download
                 target="_blank"
                 rel="noopener noreferrer"
+                data-umami-event="Hero - Downloaded Resume"
               >
                 <Download className="mr-2 h-5 w-5" />
                 Download Resume
