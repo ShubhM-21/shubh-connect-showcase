@@ -155,6 +155,7 @@ export function AwardsSection() {
   variant="outline"
   size="lg"
   className="glass-card hover:bg-accent/20 transition-all duration-300 px-8"
+  data-umami-event={isExpanded ? "Awards - Clicked Show Less" : "Awards - Clicked See More"}
 >
   {isExpanded ? (
     <>
@@ -176,7 +177,7 @@ export function AwardsSection() {
           <div className="space-y-8">
 
             {/* Certifications */}
-            <Card className="glass-card animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
+            <Card className="glass-card animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
               <CardHeader>
                 <CardTitle className="text-xl flex items-center gap-2">
                   <GraduationCap className="h-5 w-5 text-brand-primary" />
