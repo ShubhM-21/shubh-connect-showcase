@@ -21,7 +21,12 @@ export function SocialLinks() {
             className="w-10 h-10 rounded-lg glass-card hover:bg-accent/20 hover:scale-110 transition-all duration-300 group"
             title={social.label}
           >
-            <a href={social.href} target="_blank" rel="noopener noreferrer">
+            <a 
+              href={social.href} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              data-umami-event={`Social - Clicked ${social.label}`}
+            >
               <Icon className="h-4 w-4" />
             </a>
           </Button>
