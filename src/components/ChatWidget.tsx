@@ -159,8 +159,8 @@ export const ChatWidget = () => {
                   onChange={(e) => setInputText(e.target.value)}
                   disabled={isLoading}
                 />
-                <Button type="submit" size="icon" disabled={isLoading}>
-                  <Send className="h-5 w-5" />
+                <Button type="submit" size="icon" disabled={isLoading} data-umami-event="Chatbot - Sent Message">
+                  <Send className="h-5 w-5" /> 
                 </Button>
               </form>
             </div>
@@ -181,6 +181,7 @@ export const ChatWidget = () => {
             onClick={() => setIsExpanded(!isExpanded)}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            data-umami-event="Chatbot - Open" 
           >
             <MessageCircle className="h-7 w-7" />
           </Button>
