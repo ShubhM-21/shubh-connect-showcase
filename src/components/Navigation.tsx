@@ -80,8 +80,8 @@ export function Navigation() {
               <Icon className="h-5 w-5 flex-shrink-0" />
 
               {/* Expanded Text */}
-              <span className={`ml-3 whitespace-nowrap transition-all duration-300 ${
-                isExpanded ? "opacity-100 w-auto" : "opacity-0 w-0 overflow-hidden"
+              <span className={`whitespace-nowrap transition-all duration-300 ${
+                isExpanded ? "ml-3 opacity-100 w-auto" : "ml-0 opacity-0 w-0 overflow-hidden"
               }`}>
                 {item.label}
               </span>
