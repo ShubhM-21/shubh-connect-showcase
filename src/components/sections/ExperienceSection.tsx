@@ -208,13 +208,14 @@ export function ExperienceSection() {
               </Card>
             ))}
 
-            {hasMoreExperiences && (
+{hasMoreExperiences && (
               <div className="text-center mt-8">
                 <Button
                   onClick={() => setShowAllExperiences(!showAllExperiences)}
                   variant="outline"
                   size="lg"
                   className="glass-card hover:bg-accent/20 transition-all duration-300 px-8"
+                  data-umami-event={showAllExperiences ? "Experience - Clicked Show Less" : "Experience - Clicked See More"}
                 >
                   {showAllExperiences ? (
                     <>
