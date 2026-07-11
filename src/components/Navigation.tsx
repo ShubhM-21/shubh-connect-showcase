@@ -75,6 +75,7 @@ export function Navigation() {
                   ? "bg-primary text-primary-foreground shadow-md"
                   : "hover:bg-accent/20 hover:scale-105"
               }`}
+              data-umami-event={`Sidebar - Clicked ${item.label}`}
             >
               <Icon className="h-5 w-5 flex-shrink-0" />
 
