@@ -103,6 +103,7 @@ export function ContactSection() {
                       ...prev, 
                       message: "I have a product opportunity I'd like to discuss with you." 
                     }))}
+                    data-umami-event="Contact - Quick Action: Product Opportunities"
                   >
                     💼 Product Opportunities
                   </Button>
@@ -114,6 +115,7 @@ export function ContactSection() {
                       ...prev, 
                       message: "I'd love to schedule a time for a detailed portfolio walkthrough." 
                     }))}
+                    data-umami-event="Contact - Quick Action: Portfolio Walkthrough"
                   >
                     📋 Portfolio Walkthrough
                   </Button>
@@ -125,6 +127,7 @@ export function ContactSection() {
                       ...prev, 
                       message: "I'm interested in learning more about your specific case studies." 
                     }))}
+                    data-umami-event="Contact - Quick Action: Case Studies"
                   >
                     📊 Case Studies
                   </Button>
@@ -185,6 +188,7 @@ export function ContactSection() {
                     type="submit" 
                     size="lg"
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-elegant hover:shadow-glow transition-all duration-300"
+                    data-umami-event="Contact - Form Submitted"
                   >
                     <div className="flex items-center gap-2">
                       <Send className="h-5 w-5" />
@@ -219,6 +223,7 @@ export function ContactSection() {
                           <a 
                             href={info.href}
                             className="text-sm text-muted-foreground hover:text-brand-primary transition-colors"
+                            data-umami-event={`Contact - Clicked ${info.label}`}
                           >
                             {info.value}
                           </a>
@@ -252,6 +257,7 @@ export function ContactSection() {
                         download 
                         target="_blank" 
                         rel="noopener noreferrer"
+                        data-umami-event="Contact - Downloaded CV"
                       >
                         <Download className="mr-2 h-4 w-4" />
                         Download CV
@@ -261,8 +267,6 @@ export function ContactSection() {
                 </div>
               </CardContent>
             </Card>
-
-
           </div>
         </div>
 
