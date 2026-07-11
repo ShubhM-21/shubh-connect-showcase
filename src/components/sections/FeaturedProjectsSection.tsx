@@ -238,6 +238,7 @@ export function FeaturedProjectsSection() {
                       ? "bg-primary text-primary-foreground shadow-md" 
                       : "hover:bg-accent/20"
                   }`}
+                  data-umami-event={`Projects Filter - Clicked ${category}`}
                 >
                   <Filter className="mr-2 h-4 w-4" />
                   {category}
@@ -264,6 +265,7 @@ export function FeaturedProjectsSection() {
                         ? "bg-secondary text-secondary-foreground" 
                         : "hover:bg-accent/20"
                     }`}
+                    data-umami-event={`Projects Filter - Clicked ${subCategory}`}
                   >
                     {subCategory}
                   </Button>
@@ -283,6 +285,7 @@ export function FeaturedProjectsSection() {
               } hover:ring-2 hover:ring-brand-primary/30`}
               style={{ animationDelay: `${index * 0.1}s` }}
               onClick={() => openProjectModal(project)}
+              data-umami-event={`Project Card - Opened ${project.title}`}
             >
               <CardHeader className="space-y-4">
                 {/* Project Thumbnail */}
@@ -377,6 +380,8 @@ export function FeaturedProjectsSection() {
                       e.stopPropagation();
                       window.open(project.github, '_blank');
                     }}
+                    // 1. EVENT FOR GITHUB LINKS
+                    data-umami-event={`Project - Clicked GitHub for ${project.title}`}
                   >
                     <Github className="mr-2 h-4 w-4" />
                     View Project
@@ -388,6 +393,8 @@ export function FeaturedProjectsSection() {
                       e.stopPropagation();
                       openProjectModal(project);
                     }}
+                    // 2. EVENT FOR OPENING CASE STUDY MODALS
+                    data-umami-event={`Project - Opened Modal for ${project.title}`}
                   >
                     <FileText className="mr-2 h-4 w-4" />
                     View Project
@@ -406,6 +413,8 @@ export function FeaturedProjectsSection() {
               variant="outline"
               size="lg"
               className="glass-card hover:bg-accent/20 transition-all duration-300 px-8"
+              // 3. CONDITIONAL EVENT FOR THE TOGGLE BUTTON
+              data-umami-event={showAllProjects ? "Projects - Clicked Show Less" : "Projects - Clicked See More"}
             >
               {showAllProjects ? (
                 <>
@@ -558,7 +567,13 @@ export function FeaturedProjectsSection() {
                             <div className="space-y-3">
                               {selectedProject.pdfLink && (
                                 <Button className="w-full" asChild>
-                                  <a href={selectedProject.pdfLink} target="_blank" rel="noopener noreferrer">
+                                  <a 
+                                    href={selectedProject.pdfLink} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    // 1. EVENT FOR OPENING THE PDF
+                                    data-umami-event={`Project Modal - Opened PDF for ${selectedProject.title}`}
+                                  >
                                     <ExternalLink className="mr-2 h-4 w-4" />
                                     Open Full PDF
                                   </a>
@@ -566,7 +581,13 @@ export function FeaturedProjectsSection() {
                               )}
                               {selectedProject.link && (
                                 <Button variant="outline" className="w-full" asChild>
-                                  <a href={selectedProject.link} target="_blank" rel="noopener noreferrer">
+                                  <a 
+                                    href={selectedProject.link} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    // 2. EVENT FOR VIEWING THE LIVE PROJECT
+                                    data-umami-event={`Project Modal - Viewed Live for ${selectedProject.title}`}
+                                  >
                                     <ExternalLink className="mr-2 h-4 w-4" />
                                     View Live Project
                                   </a>
@@ -574,12 +595,18 @@ export function FeaturedProjectsSection() {
                               )}
                               {selectedProject.github && (
                                 <Button variant="outline" className="w-full" asChild>
-                                  <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
+                                  <a 
+                                    href={selectedProject.github} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    // 3. EVENT FOR VIEWING THE GITHUB CODE
+                                    data-umami-event={`Project Modal - Viewed Code for ${selectedProject.title}`}
+                                  >
                                     <Github className="mr-2 h-4 w-4" />
                                     View Code
                                   </a>
                                 </Button>
-                              )}
+                              )}                            
                             </div>
                           </div>
                         </div>
