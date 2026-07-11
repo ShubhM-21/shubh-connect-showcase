@@ -99,7 +99,7 @@ export const ChatWidget = () => {
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
               <h3 className="font-semibold text-lg text-slate-800 dark:text-white">Portfolio Assistant</h3>
-              <Button variant="ghost" size="icon" onClick={() => setIsExpanded(false)}>
+              <Button variant="ghost" size="icon" onClick={() => setIsExpanded(false)} data-umami-event="Chatbot - Closed">
                 <X className="h-5 w-5" />
               </Button>
             </div>
@@ -181,7 +181,7 @@ export const ChatWidget = () => {
             onClick={() => setIsExpanded(!isExpanded)}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            data-umami-event="Chatbot - Open" 
+            data-umami-event="Chatbot - Clicked" 
           >
             <MessageCircle className="h-7 w-7" />
           </Button>
