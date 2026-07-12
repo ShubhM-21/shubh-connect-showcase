@@ -11,7 +11,7 @@ export function HeroSection() {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section id="hero" className="min-h-screen flex items-start md:items-center justify-center relative overflow-hidden">
       {/* Enhanced Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Large Gradient Orbs */}
@@ -81,21 +81,29 @@ export function HeroSection() {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10 min-h-screen">
+      {/* Merged: px-4 gap-8 for mobile (VS Code), lg:px-12 md:gap-16 for desktop (Deployed) */}
+      <div className="container mx-auto px-4 md:px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center relative z-10 min-h-screen">
+        
         {/* Content */}
-        <div className="space-y-8 animate-fade-in-up flex flex-col justify-center">
+        {/* Merged: pt-4, space-y-5, justify-start for mobile (VS Code), md:pt-0, md:space-y-8, md:justify-center for desktop (Deployed) */}
+        <div className="space-y-5 md:space-y-8 animate-fade-in-up flex flex-col justify-start md:justify-center pt-4 md:pt-0">
           <div className="space-y-4">
             <p className="text-brand-primary font-medium tracking-wide uppercase text-sm">
               Welcome to my portfolio
             </p>
-            <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
-              <span className="gradient-text">Shubh</span>{" "}
+            {/* Merged: text-6xl for mobile (VS Code), lg:text-7xl for desktop (Deployed) */}
+            <h1 className="text-6xl lg:text-7xl font-bold leading-tight">
+              <span className="gradient-text">Shubh</span>
+              {/* Added mobile line break, kept space for desktop */}
+              <br className="block md:hidden" />
+              <span className="hidden md:inline"> </span>
               <span className="text-foreground">Madhyan</span>
             </h1>
             <h2 className="text-2xl lg:text-3xl font-light text-muted-foreground">
               Product Manager | Turning Data Into User-Centered Solutions
             </h2>
-            <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
+            {/* Merged text coloring for best contrast across views */}
+            <p className="text-lg text-gray-600 dark:text-gray-300 md:text-muted-foreground max-w-lg leading-relaxed">
               Transforming complex data into actionable insights that drive user-centered product decisions. 
               Proven track record of launching products and optimizing user experiences through strategic thinking.
             </p>
@@ -131,8 +139,8 @@ export function HeroSection() {
             </Button>
           </div>
 
-          {/* Stats */}
-          <div className="flex justify-evenly items-center gap-8 pt-8 border-t border-border/50">
+          {/* Stats - hidden on mobile (VS Code), standard layout on desktop (Deployed) */}
+          <div className="hidden md:flex justify-evenly items-center gap-8 pt-8 border-t border-border/50">
             <div className="text-center">
               <div className="text-3xl font-bold gradient-text">1+</div>
               <div className="text-sm text-muted-foreground">Year of Impact-Driven Experience</div>
@@ -148,8 +156,8 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* Profile Image */}
-        <div className="flex justify-center lg:justify-end animate-fade-in items-center">
+        {/* Profile Image - hidden on mobile (VS Code), standard layout on desktop (Deployed) */}
+        <div className="hidden md:flex justify-center lg:justify-end animate-fade-in items-center">
           <div className="relative">
             {/* Decorative Elements */}
             <div className="absolute -top-4 -left-4 w-72 h-72 bg-gradient-to-br from-brand-green/20 to-brand-primary/20 rounded-3xl blur-3xl animate-float" />

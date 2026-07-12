@@ -21,8 +21,8 @@ const skillsData = {
 
 export function SkillsSection() {
   return (
-    <section id="skills" className="py-12 px-6 lg:px-12 bg-muted/30">
-      <div className="container mx-auto px-6">
+    <section id="skills" className="py-12 px-4 md:px-6 lg:px-12 bg-muted/30">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-12 animate-fade-in-up">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
             My <span className="gradient-text">Skills</span>

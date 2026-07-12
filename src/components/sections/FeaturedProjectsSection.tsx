@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ExternalLink, Github, Filter, X, ChevronUp, ChevronDown, FileText, ChartBar as BarChart3 } from "lucide-react";
+import { ExternalLink, Github, Filter, X, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, FileText, ChartBar as BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -166,6 +166,8 @@ export function FeaturedProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showAllProjects, setShowAllProjects] = useState(false);
+  // CHANGE 4: pagination state for mobile 3-cards-per-page view
+  const [mobilePage, setMobilePage] = useState(0);
 
   const filteredProjects = projects.filter(project => {
     if (activeCategory === "All") return true;
@@ -180,6 +182,21 @@ export function FeaturedProjectsSection() {
 
   const displayedProjects = showAllProjects ? filteredProjects : filteredProjects.slice(0, 6);
   const hasMoreProjects = filteredProjects.length > 6;
+
+  // CHANGE 4: chunk ALL filtered projects into groups of 3 for mobile pagination
+  const MOBILE_CHUNK_SIZE = 3;
+  const mobileChunks: Project[][] = [];
+  for (let i = 0; i < filteredProjects.length; i += MOBILE_CHUNK_SIZE) {
+    mobileChunks.push(filteredProjects.slice(i, i + MOBILE_CHUNK_SIZE));
+  }
+  const safeMobilePage = mobileChunks.length > 0 ? Math.min(mobilePage, mobileChunks.length - 1) : 0;
+
+  const goToNextMobilePage = () => {
+    setMobilePage((prev) => Math.min(prev + 1, mobileChunks.length - 1));
+  };
+  const goToPrevMobilePage = () => {
+    setMobilePage((prev) => Math.max(prev - 1, 0));
+  };
 
   const openProjectModal = (project: Project) => {
     setSelectedProject(project);
@@ -205,9 +222,141 @@ export function FeaturedProjectsSection() {
     }
   });
 
+  // CHANGE 2 & 3: shared card renderer used by both mobile pagination and the
+  // untouched desktop grid. All mobile-specific tweaks are gated by `md:` so
+  // this single renderer works correctly in both contexts.
+  const renderProjectCard = (project: Project, index: number) => (
+    <Card 
+      key={project.id}
+      className={`glass-card hover:shadow-elegant transition-all duration-500 hover:scale-[1.02] group cursor-pointer ${
+        project.featured ? "ring-2 ring-brand-primary/20" : ""
+      } hover:ring-2 hover:ring-brand-primary/30`}
+      style={{ animationDelay: `${index * 0.1}s` }}
+      onClick={() => openProjectModal(project)}
+      data-umami-event={`Project Card - Opened ${project.title}`}
+    >
+      {/* CHANGE 3: reduced padding + shorter thumbnail on mobile */}
+      <CardHeader className="space-y-4 md:pb-4">
+        {/* Project Thumbnail */}
+        <div className="h-40 md:h-52 bg-gradient-to-br from-brand-sage/20 to-brand-primary/20 rounded-lg overflow-hidden relative group-hover:shadow-md transition-all duration-300">
+          {project.featured && (
+            <div className="absolute top-4 right-4 z-10">
+              <Badge className="bg-primary text-primary-foreground">Featured</Badge>
+            </div>
+          )}
+          {project.imageUrl ? (
+            <img 
+              src={project.imageUrl} 
+              alt={project.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              onError={(e) => {
+                // Fallback to placeholder if image fails to load
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                target.nextElementSibling?.classList.remove('hidden');
+              }}
+            />
+          ) : null}
+          <div className={`w-full h-full flex items-center justify-center ${project.imageUrl ? 'hidden' : ''}`}>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-brand-primary/30 rounded-full flex items-center justify-center mx-auto mb-2">
+                {project.category === "Analytics" ? (
+                  <BarChart3 className="h-8 w-8 text-brand-primary" />
+                ) : (
+                  <FileText className="h-8 w-8 text-brand-primary" />
+                )}
+              </div>
+              <p className="text-sm text-muted-foreground">{project.subCategory || project.category}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Project Info */}
+        <div>
+          <CardTitle className="text-xl group-hover:text-brand-primary transition-colors leading-tight mb-3">
+            {project.title}
+          </CardTitle>
+          
+          <div className="flex items-center gap-2 mb-3">
+            <Badge variant="outline" className="text-xs">
+              {project.category}
+            </Badge>
+            {project.subCategory && (
+              <Badge variant="secondary" className="text-xs">
+                {project.subCategory}
+              </Badge>
+            )}
+          </div>
+        </div>
+      </CardHeader>
+
+      <CardContent className="space-y-4 p-4 md:p-6 pt-0">
+        {/* CHANGE 3: clamp description to 2 lines on mobile only */}
+        <p className="text-muted-foreground leading-relaxed text-sm line-clamp-2 md:line-clamp-none">
+          {project.description}
+        </p>
+
+        {/* CHANGE 2: Impact hidden on mobile */}
+        {project.impact && (
+          <div className="hidden md:block p-3 bg-brand-green/10 rounded-lg border border-brand-green/20">
+            <p className="text-sm font-medium text-brand-dark">
+              <strong>Impact:</strong> {project.impact}
+            </p>
+          </div>
+        )}
+
+        {/* CHANGE 2: Focus Areas hidden on mobile */}
+        <div className="hidden md:block">
+          <p className="text-sm font-medium mb-2">Focus Areas:</p>
+          <div className="flex flex-wrap gap-1">
+            {project.techStack.slice(0, 3).map((tech) => (
+              <Badge key={tech} variant="secondary" className="text-xs px-2 py-1">
+                {tech}
+              </Badge>
+            ))}
+            {project.techStack.length > 3 && (
+              <Badge variant="secondary" className="text-xs px-2 py-1">
+                +{project.techStack.length - 3} more
+              </Badge>
+            )}
+          </div>
+        </div>
+
+        {/* Action Button */}
+        {project.github ? (
+          <Button 
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl"
+            onClick={(e) => {
+              e.stopPropagation();
+              window.open(project.github, '_blank');
+            }}
+            // 1. EVENT FOR GITHUB LINKS
+            data-umami-event={`Project - Clicked GitHub for ${project.title}`}
+          >
+            <Github className="mr-2 h-4 w-4" />
+            View Project
+          </Button>
+        ) : (
+          <Button 
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl"
+            onClick={(e) => {
+              e.stopPropagation();
+              openProjectModal(project);
+            }}
+            // 2. EVENT FOR OPENING CASE STUDY MODALS
+            data-umami-event={`Project - Opened Modal for ${project.title}`}
+          >
+            <FileText className="mr-2 h-4 w-4" />
+            View Project
+          </Button>
+        )}
+      </CardContent>
+    </Card>
+  );
+
   return (
-    <section id="projects" className="py-12 px-6 lg:px-12">
-      <div className="container mx-auto px-6">
+    <section id="projects" className="py-12 px-4 md:px-6 lg:px-12">
+      <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in-up">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
@@ -221,9 +370,9 @@ export function FeaturedProjectsSection() {
 
         {/* Category Filters */}
         <div className="flex flex-col items-center gap-6 mb-12">
-          {/* Main Categories */}
-          <div className="glass-card p-2 rounded-xl animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-            <div className="flex flex-wrap gap-2 justify-center">
+          {/* CHANGE 1: Main Categories — single scrollable row on mobile, original layout on desktop */}
+          <div className="glass-card p-2 rounded-xl animate-fade-in-up w-full md:w-auto" style={{ animationDelay: "0.2s" }}>
+            <div className="flex overflow-x-auto whitespace-nowrap hide-scrollbar gap-2 justify-start px-1 md:flex-wrap md:overflow-visible md:whitespace-normal md:justify-center md:px-0">
               {mainCategories.map((category) => (
                 <Button
                   key={category}
@@ -232,8 +381,9 @@ export function FeaturedProjectsSection() {
                     setActiveCategory(category);
                     setActiveSubCategory("All");
                     setShowAllProjects(false);
+                    setMobilePage(0);
                   }}
-                  className={`px-6 py-2 rounded-lg transition-all duration-300 ${
+                  className={`flex-shrink-0 px-6 py-2 rounded-lg transition-all duration-300 ${
                     activeCategory === category 
                       ? "bg-primary text-primary-foreground shadow-md" 
                       : "hover:bg-accent/20"
@@ -247,10 +397,10 @@ export function FeaturedProjectsSection() {
             </div>
           </div>
 
-          {/* Product Sub-categories */}
+          {/* CHANGE 1: Product Sub-categories — same single-row treatment */}
           {activeCategory === "Product" && (
-            <div className="glass-card p-2 rounded-xl animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-              <div className="flex flex-wrap gap-2 justify-center">
+            <div className="glass-card p-2 rounded-xl animate-fade-in-up w-full md:w-auto" style={{ animationDelay: "0.3s" }}>
+              <div className="flex overflow-x-auto whitespace-nowrap hide-scrollbar gap-2 justify-start px-1 md:flex-wrap md:overflow-visible md:whitespace-normal md:justify-center md:px-0">
                 {productSubCategories.map((subCategory) => (
                   <Button
                     key={subCategory}
@@ -258,9 +408,10 @@ export function FeaturedProjectsSection() {
                     onClick={() => {
                       setActiveSubCategory(subCategory);
                       setShowAllProjects(false);
+                      setMobilePage(0);
                     }}
                     size="sm"
-                    className={`px-4 py-1 rounded-lg transition-all duration-300 ${
+                    className={`flex-shrink-0 px-4 py-1 rounded-lg transition-all duration-300 ${
                       activeSubCategory === subCategory 
                         ? "bg-secondary text-secondary-foreground" 
                         : "hover:bg-accent/20"
@@ -275,139 +426,76 @@ export function FeaturedProjectsSection() {
           )}
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {displayedProjects.map((project, index) => (
-            <Card 
-              key={project.id}
-              className={`glass-card hover:shadow-elegant transition-all duration-500 hover:scale-[1.02] group cursor-pointer ${
-                project.featured ? "ring-2 ring-brand-primary/20" : ""
-              } hover:ring-2 hover:ring-brand-primary/30`}
-              style={{ animationDelay: `${index * 0.1}s` }}
-              onClick={() => openProjectModal(project)}
-              data-umami-event={`Project Card - Opened ${project.title}`}
-            >
-              <CardHeader className="space-y-4">
-                {/* Project Thumbnail */}
-                <div className="aspect-video bg-gradient-to-br from-brand-sage/20 to-brand-primary/20 rounded-lg overflow-hidden relative group-hover:shadow-md transition-all duration-300">
-                  {project.featured && (
-                    <div className="absolute top-4 right-4 z-10">
-                      <Badge className="bg-primary text-primary-foreground">Featured</Badge>
+        {/* CHANGE 4: Mobile-only paginated, swipeable groups of 3 (vertical stack per page) */}
+        <div className="md:hidden">
+          {filteredProjects.length > 0 && (
+            <>
+              <div className="overflow-hidden">
+                <div
+                  className="flex transition-transform duration-300 ease-in-out"
+                  style={{ transform: `translateX(-${safeMobilePage * 100}%)` }}
+                >
+                  {mobileChunks.map((chunk, pageIdx) => (
+                    <div key={pageIdx} className="w-full flex-shrink-0 flex flex-col gap-6">
+                      {chunk.map((project, idx) => renderProjectCard(project, idx))}
                     </div>
-                  )}
-                  {project.imageUrl ? (
-                    <img 
-                      src={project.imageUrl} 
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      onError={(e) => {
-                        // Fallback to placeholder if image fails to load
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        target.nextElementSibling?.classList.remove('hidden');
-                      }}
-                    />
-                  ) : null}
-                  <div className={`w-full h-full flex items-center justify-center ${project.imageUrl ? 'hidden' : ''}`}>
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-brand-primary/30 rounded-full flex items-center justify-center mx-auto mb-2">
-                        {project.category === "Analytics" ? (
-                          <BarChart3 className="h-8 w-8 text-brand-primary" />
-                        ) : (
-                          <FileText className="h-8 w-8 text-brand-primary" />
-                        )}
-                      </div>
-                      <p className="text-sm text-muted-foreground">{project.subCategory || project.category}</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
+              </div>
 
-                {/* Project Info */}
-                <div>
-                  <CardTitle className="text-xl group-hover:text-brand-primary transition-colors leading-tight mb-3">
-                    {project.title}
-                  </CardTitle>
-                  
-                  <div className="flex items-center gap-2 mb-3">
-                    <Badge variant="outline" className="text-xs">
-                      {project.category}
-                    </Badge>
-                    {project.subCategory && (
-                      <Badge variant="secondary" className="text-xs">
-                        {project.subCategory}
-                      </Badge>
-                    )}
-                  </div>
-                </div>
-              </CardHeader>
+              {mobileChunks.length > 1 && (
+                <div className="flex items-center justify-center gap-4 mt-6">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={goToPrevMobilePage}
+                    disabled={safeMobilePage === 0}
+                    className="rounded-full disabled:opacity-30"
+                    aria-label="Previous page"
+                    data-umami-event="Projects Mobile - Clicked Previous Page"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </Button>
 
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground leading-relaxed text-sm">
-                  {project.description}
-                </p>
-
-                {/* Impact Section */}
-                {project.impact && (
-                  <div className="p-3 bg-brand-green/10 rounded-lg border border-brand-green/20">
-                    <p className="text-sm font-medium text-brand-dark">
-                      <strong>Impact:</strong> {project.impact}
-                    </p>
-                  </div>
-                )}
-
-                {/* Tech Stack */}
-                <div>
-                  <p className="text-sm font-medium mb-2">Focus Areas:</p>
-                  <div className="flex flex-wrap gap-1">
-                    {project.techStack.slice(0, 3).map((tech) => (
-                      <Badge key={tech} variant="secondary" className="text-xs px-2 py-1">
-                        {tech}
-                      </Badge>
+                  <div className="flex gap-2">
+                    {mobileChunks.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setMobilePage(i)}
+                        className={`h-2 rounded-full transition-all duration-300 ${
+                          i === safeMobilePage ? "w-6 bg-primary" : "w-2 bg-muted-foreground/30"
+                        }`}
+                        aria-label={`Go to page ${i + 1}`}
+                        data-umami-event={`Projects Mobile - Clicked Dot ${i + 1}`}
+                      />
                     ))}
-                    {project.techStack.length > 3 && (
-                      <Badge variant="secondary" className="text-xs px-2 py-1">
-                        +{project.techStack.length - 3} more
-                      </Badge>
-                    )}
                   </div>
-                </div>
 
-                {/* Action Button */}
-                {project.github ? (
-                  <Button 
-                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.open(project.github, '_blank');
-                    }}
-                    // 1. EVENT FOR GITHUB LINKS
-                    data-umami-event={`Project - Clicked GitHub for ${project.title}`}
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={goToNextMobilePage}
+                    disabled={safeMobilePage === mobileChunks.length - 1}
+                    className="rounded-full disabled:opacity-30"
+                    aria-label="Next page"
+                    data-umami-event="Projects Mobile - Clicked Next Page"
                   >
-                    <Github className="mr-2 h-4 w-4" />
-                    View Project
+                    <ChevronRight className="h-5 w-5" />
                   </Button>
-                ) : (
-                  <Button 
-                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openProjectModal(project);
-                    }}
-                    // 2. EVENT FOR OPENING CASE STUDY MODALS
-                    data-umami-event={`Project - Opened Modal for ${project.title}`}
-                  >
-                    <FileText className="mr-2 h-4 w-4" />
-                    View Project
-                  </Button>
-                )}
-              </CardContent>
-            </Card>
-          ))}
+                </div>
+              )}
+            </>
+          )}
         </div>
 
-        {/* See More / Show Less Button */}
+        {/* Desktop Projects Grid — unchanged, just wrapped in hidden md:grid */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {displayedProjects.map((project, index) => renderProjectCard(project, index))}
+        </div>
+
+        {/* See More / Show Less Button — desktop only now, mobile uses pagination instead */}
         {hasMoreProjects && (
-          <div className="text-center mt-12 animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
+          <div className="hidden md:block text-center mt-12 animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
             <Button
               onClick={() => setShowAllProjects(!showAllProjects)}
               variant="outline"

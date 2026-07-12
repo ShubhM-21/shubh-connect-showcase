@@ -66,8 +66,8 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-12 px-6 lg:px-12 bg-muted/30">
-      <div className="container mx-auto px-6">
+    <section id="contact" className="pt-12 pb-32 md:py-12 px-4 md:px-6 lg:px-12 bg-muted/30">
+      <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in-up">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
@@ -93,12 +93,11 @@ export function ContactSection() {
                 </p>
               </CardHeader>
               <CardContent>
-                {/* Quick Action Buttons */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+                <div className="flex overflow-x-auto whitespace-nowrap hide-scrollbar gap-3 px-1 md:grid md:grid-cols-3 md:overflow-visible md:whitespace-normal md:px-0 mb-6">
                   <Button 
                     variant="outline" 
                     size="sm"
-                    className="glass-card hover:bg-accent/20 transition-all duration-300 text-xs"
+                    className="flex-shrink-0 glass-card hover:bg-accent/20 transition-all duration-300 text-xs"
                     onClick={() => setFormData(prev => ({ 
                       ...prev, 
                       message: "I have a product opportunity I'd like to discuss with you." 
@@ -110,7 +109,7 @@ export function ContactSection() {
                   <Button 
                     variant="outline" 
                     size="sm"
-                    className="glass-card hover:bg-accent/20 transition-all duration-300 text-xs"
+                    className="flex-shrink-0 glass-card hover:bg-accent/20 transition-all duration-300 text-xs"
                     onClick={() => setFormData(prev => ({ 
                       ...prev, 
                       message: "I'd love to schedule a time for a detailed portfolio walkthrough." 
@@ -122,7 +121,7 @@ export function ContactSection() {
                   <Button 
                     variant="outline" 
                     size="sm"
-                    className="glass-card hover:bg-accent/20 transition-all duration-300 text-xs"
+                    className="flex-shrink-0 glass-card hover:bg-accent/20 transition-all duration-300 text-xs"
                     onClick={() => setFormData(prev => ({ 
                       ...prev, 
                       message: "I'm interested in learning more about your specific case studies." 
@@ -232,6 +231,27 @@ export function ContactSection() {
                     </div>
                   );
                 })}
+
+                <hr className="my-6 border-border md:hidden" />
+<div className="flex gap-4 md:hidden">
+                  {socialLinks.map((social) => {
+                    const SocialIcon = social.icon;
+                    
+                    return (
+                      <a
+                        key={social.label}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`p-2 rounded-full hover:bg-muted transition-colors ${social.color}`}
+                        aria-label={social.label}
+                        data-umami-event={`Contact - Clicked Social: ${social.label}`}
+                      >
+                        <SocialIcon className="h-5 w-5"/>
+                      </a>
+                    );
+                  })}
+                </div>
               </CardContent>
             </Card>
 
@@ -239,12 +259,12 @@ export function ContactSection() {
             <Card className="glass-card animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
               <CardContent className="p-6">
                 <div className="text-center space-y-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-brand-primary to-brand-green rounded-full flex items-center justify-center mx-auto">
+                  <div className="hidden md:flex w-16 h-16 bg-gradient-to-br from-brand-primary to-brand-green rounded-full items-center justify-center mx-auto">
                     <Download className="h-8 w-8 text-white" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-2">Download Resume</h3>
-                    <p className="text-sm text-muted-foreground mb-4">
+                    <p className="hidden md:block text-sm text-muted-foreground mb-4">
                       Get a detailed overview of my experience and skills.
                     </p>
                     <Button 

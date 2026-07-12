@@ -90,7 +90,7 @@ export const ChatWidget = () => {
   };
 
   return (
-    <div className="fixed bottom-8 right-8 z-50 flex items-center gap-3 group">
+    <div className="fixed bottom-[100px] right-6 md:bottom-8 md:right-8 z-50 flex items-center gap-3 group">
       {/* Column: Expanded Chat Window + Floating Button row */}
       <div className="flex flex-col items-end">
         {/* Expanded Chat Window */}

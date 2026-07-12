@@ -9,7 +9,7 @@ const socialLinks = [
 
 export function SocialLinks() {
   return (
-    <div className="fixed top-6 right-6 z-50 flex space-x-2">
+    <div className="hidden md:flex fixed top-6 right-6 z-50 space-x-2">
       {socialLinks.map((social) => {
         const Icon = social.icon;
         return (

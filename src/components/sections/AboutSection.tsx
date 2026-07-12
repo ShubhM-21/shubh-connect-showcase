@@ -26,14 +26,15 @@ const education = [
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-12 px-6 lg:px-12 bg-muted/30">
-      <div className="container mx-auto px-6">
+    <section id="about" className="py-12 px-4 md:px-6 lg:px-12 bg-muted/30">
+      <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in-up">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
             About <span className="gradient-text">Me</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          {/* Merged: Left aligned on mobile, centered on desktop */}
+          <p className="text-left md:text-center text-slate-700 dark:text-slate-300 md:text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
             I'm passionate about bridging the gap between user needs and business objectives through 
             data-driven product decisions. My journey combines engineering precision with strategic thinking.
           </p>
@@ -42,28 +43,31 @@ export function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
           {/* Left Column - Bio & Goals */}
           <div className="flex flex-col h-full space-y-6 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            
+            {/* Restored 'My Mission' block from Deployed Code */}
             <div className="space-y-6">
               <h3 className="text-2xl font-semibold flex items-center gap-3 mb-6">
                 <Target className="h-6 w-6 text-brand-primary" />
                 My Mission
               </h3>
-              <p className="text-lg text-muted-foreground leading-relaxed">
+              <p className="text-left text-slate-700 dark:text-slate-300 md:text-muted-foreground text-base md:text-lg leading-relaxed">
                 To transform complex user needs into intuitive digital experiences through data-driven 
                 product decisions. I believe exceptional products are born from deep user understanding, 
                 strategic thinking, and measurable impact.
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-  Having recently scaled core product mechanics and omnichannel funnels at <strong className="text-brand-primary">The Sleep Company</strong>, 
-  and previously shipping critical growth features at <strong className="text-brand-primary">Niyo Solutions</strong> and <strong className="text-brand-primary">Rigi</strong>, 
-  I specialize in owning the full roadmap-to-release cycle. From expanding robust API frameworks to launching conversational commerce experiments that move core business metrics, 
-  I thrive on turning ambiguous problems into measurable business outcomes.
-</p>
+              <p className="text-left text-slate-700 dark:text-slate-300 md:text-muted-foreground text-base md:text-lg leading-relaxed">
+                Having recently scaled core product mechanics and omnichannel funnels at <strong className="text-brand-primary">The Sleep Company</strong>, 
+                and previously shipping critical growth features at <strong className="text-brand-primary">Niyo Solutions</strong> and <strong className="text-brand-primary">Rigi</strong>, 
+                I specialize in owning the full roadmap-to-release cycle. From expanding robust API frameworks to launching conversational commerce experiments that move core business metrics, 
+                I thrive on turning ambiguous problems into measurable business outcomes.
+              </p>
             </div>
 
             {/* Skills Grid */}
             <div className="space-y-6 mt-auto">
-              <h3 className="text-2xl font-semibold">Core Competencies</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <h3 className="text-2xl font-semibold text-left">Core Competencies</h3>
+              {/* Merged: 2-column on both mobile and desktop, gap scaled for desktop */}
+              <div className="grid grid-cols-2 gap-3 md:gap-4">
                 {skills.map((skill, index) => {
                   const Icon = skill.icon;
                   return (
@@ -72,8 +76,9 @@ export function AboutSection() {
                       className="glass-card hover:shadow-card transition-all duration-300 hover:scale-105"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
-                      <CardContent className="p-4">
-                        <div className="flex items-start gap-3">
+                      <CardContent className="p-3 md:p-4">
+                        {/* Merged: Stacked/Centered on mobile, Row/Left-aligned on desktop */}
+                        <div className="flex flex-col items-center text-center md:flex-row md:items-start md:text-left gap-3">
                           <div className="p-2 bg-primary/10 rounded-lg">
                             <Icon className="h-5 w-5 text-brand-primary" />
                           </div>
@@ -115,6 +120,7 @@ export function AboutSection() {
                         {edu.minor && (
                           <p className="text-sm text-muted-foreground">{edu.minor}</p>
                         )}
+                        {/* Restored missing description */}
                         <p className="text-muted-foreground">{edu.description}</p>
                       </div>
                     </CardContent>
@@ -123,24 +129,19 @@ export function AboutSection() {
               </div>
             </div>
 
-            {/* Workspace Image */}
-            <div className="mt-auto">
+            {/* Workspace Image - Hidden on mobile, visible on desktop */}
+            <div className="mt-auto hidden md:block">
               <Card className="glass-card overflow-hidden">
-                
-                {/* 1. LIGHT MODE IMAGE: Visible normally, hidden in dark mode */}
                 <img 
                   src="/Images/AboutSec-Light.png" 
                   alt="My Workspace"
                   className="block dark:hidden w-full h-auto rounded-xl object-cover shadow-lg"
                 />
-                
-                {/* 2. DARK MODE IMAGE: Hidden normally, visible in dark mode */}
                 <img 
                   src="/Images/AboutSec.png" 
                   alt="My Workspace"
                   className="hidden dark:block w-full h-auto rounded-xl object-cover shadow-lg"
                 />
-
               </Card>
             </div>
           </div>

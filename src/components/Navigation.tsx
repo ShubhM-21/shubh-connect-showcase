@@ -21,7 +21,6 @@ export function Navigation() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
       
-      // Update active section based on scroll position
       const sections = navItems.map(item => item.id);
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
@@ -48,7 +47,7 @@ export function Navigation() {
 
   return (
     <nav
-      className={`fixed left-6 z-50 transition-all duration-500 rounded-2xl border ${
+      className={`hidden md:block fixed left-6 z-50 transition-all duration-500 rounded-2xl border ${
         isExpanded || isScrolled 
           ? "bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-white/20 dark:border-white/10 shadow-elegant" 
           : "bg-transparent border-transparent"
@@ -58,7 +57,6 @@ export function Navigation() {
       onMouseLeave={() => setIsExpanded(false)}
     >
       <div className="flex flex-col items-center space-y-2 p-4">
-        {/* Navigation Items */}
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeSection === item.id;
@@ -78,8 +76,6 @@ export function Navigation() {
               data-umami-event={`Sidebar - Clicked ${item.label}`}
             >
               <Icon className="h-5 w-5 flex-shrink-0" />
-
-              {/* Expanded Text */}
               <span className={`whitespace-nowrap transition-all duration-300 ${
                 isExpanded ? "ml-3 opacity-100 w-auto" : "ml-0 opacity-0 w-0 overflow-hidden"
               }`}>
@@ -88,11 +84,7 @@ export function Navigation() {
             </Button>
           );
         })}
-
-        {/* Divider */}
         <div className={`h-px bg-border my-2 ${isExpanded ? "w-full" : "w-8"}`} />
-
-        {/* Theme Toggle */}
         <div className={`${isExpanded ? "w-full" : "w-12 flex justify-center"} transition-all duration-300`}>
           <ThemeToggle expanded={isExpanded} />
         </div>

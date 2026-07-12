@@ -76,9 +76,17 @@ export function AwardsSection() {
   const [isExpanded, setIsExpanded] = useState(false);
   const visibleAwards = isExpanded ? achievements : achievements.slice(0, 2);
 
+  // CHANGE 2 & 3: tracks which award cards are expanded on mobile (independent per card)
+  const [expandedCards, setExpandedCards] = useState<number[]>([]);
+  const toggleExpand = (index: number) => {
+    setExpandedCards((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+    );
+  };
+
   return (
-    <section id="awards" className="py-12 px-6 lg:px-12">
-      <div className="container mx-auto px-6">
+    <section id="awards" className="py-12 px-4 md:px-6 lg:px-12">
+      <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in-up">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
@@ -95,18 +103,21 @@ export function AwardsSection() {
           <div className="lg:col-span-2 space-y-6">
             {visibleAwards.map((achievement, index) => {
               const Icon = achievement.icon;
+              const cardIsExpanded = expandedCards.includes(index);
               return (
                 <Card 
                   key={index}
-                  className="glass-card hover:shadow-elegant transition-all duration-500 hover:scale-[1.02] animate-fade-in-up"
+                  onClick={() => toggleExpand(index)}
+                  className="glass-card hover:shadow-elegant transition-all duration-500 hover:scale-[1.02] animate-fade-in-up cursor-pointer md:cursor-default"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <CardHeader>
-                    <div className="flex items-start gap-4">
+                    {/* CHANGE 1: smaller icon box + tighter icon on mobile, original sizing on desktop */}
+                    <div className="flex items-start gap-3 md:gap-4">
                       {/* Award Icon */}
-                      <div className="p-3 bg-gradient-to-br from-brand-primary to-brand-green rounded-xl">
-                        <Icon className="h-6 w-6 text-white" />
-                      </div>
+<div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-gradient-to-br from-brand-primary to-brand-green rounded-lg md:rounded-xl flex-shrink-0">
+  <Icon className="w-5 h-5 md:w-6 md:h-6 text-white flex-shrink-0" />
+</div>
                     
                       
                       <div className="flex-1">
@@ -131,17 +142,37 @@ export function AwardsSection() {
                       {achievement.description}
                     </p>
 
-                    {/* Achievement Details */}
-                    <div className="bg-brand-green/10 p-4 rounded-lg border border-brand-green/20">
-                      <h4 className="font-semibold mb-2 text-brand-dark">Key Highlights:</h4>
-                      <ul className="space-y-1">
-                        {achievement.details.map((detail, idx) => (
-                          <li key={idx} className="flex items-center gap-2">
-                            <Award className="h-4 w-4 text-brand-primary flex-shrink-0" />
-                            <span className="text-sm text-brand-dark">{detail}</span>
-                          </li>
-                        ))}
-                      </ul>
+                    {/* CHANGE 2: Key Highlights wrapped in smoothly animating collapsible grid on mobile,
+                        always open on desktop via md:grid-rows-[1fr] */}
+                    <div
+                      className={`grid transition-all duration-300 ease-in-out md:grid-rows-[1fr] md:opacity-100 ${
+                        cardIsExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                      }`}
+                    >
+                      <div className="overflow-hidden">
+                        <div className="bg-brand-green/10 p-4 rounded-lg border border-brand-green/20">
+                          <h4 className="font-semibold mb-2 text-brand-dark">Key Highlights:</h4>
+                          <ul className="space-y-1">
+                            {achievement.details.map((detail, idx) => (
+                              <li key={idx} className="flex items-center gap-2">
+                                <Award className="h-4 w-4 text-brand-primary flex-shrink-0" />
+                                <span className="text-sm text-brand-dark">{detail}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* CHANGE 3: mobile-only visual cue, tap passes through to Card's onClick */}
+                    <div className="flex md:hidden mt-2 pointer-events-none select-none">
+                      <div className="flex w-full items-center justify-center gap-2 py-2 text-sm font-medium text-brand-primary">
+                        {cardIsExpanded ? (
+                          <>Show Less <ChevronUp className="h-4 w-4"/></>
+                        ) : (
+                          <>View Details <ChevronDown className="h-4 w-4"/></>
+                        )}
+                      </div>
                     </div>
                   </CardContent>
                 </Card>

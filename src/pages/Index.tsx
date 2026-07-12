@@ -9,6 +9,8 @@ import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { AwardsSection } from "@/components/sections/AwardsSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
+import { MobileNavigation } from "@/components/MobileNavigation";
+import { ScrollAwareSocialBar } from "@/components/ScrollAwareSocialBar";
 
 const Index = () => {
   return (
@@ -16,11 +18,15 @@ const Index = () => {
       {/* Navigation */}
       <Navigation />
       
-      {/* Social Links */}
+      {/* Social Links (desktop) */}
       <SocialLinks />
       
+      {/* Scroll-aware social bar (mobile) */}
+      <ScrollAwareSocialBar />
+      
       {/* Main Content */}
-      <main className="transition-all duration-300 ml-16 lg:ml-20">
+      {/* Kept px-0 for mobile, replaced all desktop padding/max-width with md:ml-16 lg:ml-20 to match deployed code */}
+      <main className="transition-all duration-300 px-0 md:ml-16 lg:ml-20">
         <HeroSection />
         
         <ScrollBlurWrapper protectHeadings={true}>
@@ -43,6 +49,9 @@ const Index = () => {
           <ContactSection />
         </ScrollBlurWrapper>
       </main>
+      
+      {/* Mobile Bottom Navigation */}
+      <MobileNavigation />
     </div>
   );
 };
