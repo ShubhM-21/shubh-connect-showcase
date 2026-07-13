@@ -82,12 +82,11 @@ export function HeroSection() {
       </div>
 
       {/* Merged: px-4 gap-8 for mobile (VS Code), lg:px-12 md:gap-16 for desktop (Deployed) */}
-      <div className="container mx-auto px-4 md:px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center relative z-10 min-h-screen">
-        
+<div className="container mx-auto px-4 md:px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-start md:items-center pt-24 md:pt-0 relative z-10 min-h-screen">        
         {/* Content */}
         {/* Merged: pt-4, space-y-5, justify-start for mobile (VS Code), md:pt-0, md:space-y-8, md:justify-center for desktop (Deployed) */}
         <div className="space-y-5 md:space-y-8 animate-fade-in-up flex flex-col justify-start md:justify-center pt-4 md:pt-0">
-          <div className="space-y-4">
+          <div className="space-y-6 md:space-y-4">
             <p className="text-brand-primary font-medium tracking-wide uppercase text-sm">
               Welcome to my portfolio
             </p>
