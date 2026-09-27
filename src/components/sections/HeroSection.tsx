@@ -1,4 +1,4 @@
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowRight, Download, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RESUME_PATH } from "@/lib/siteConfig";
 
@@ -8,6 +8,11 @@ export function HeroSection() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+    
+    // Fires the event to automatically switch to the AI tab
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent("switchToCategory", { detail: "AI" }));
+    }, 300); 
   };
 
   return (
@@ -110,15 +115,47 @@ export function HeroSection() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
+            <style>{`
+              @keyframes shimmer {
+                0% { transform: translateX(-100%); }
+                100% { transform: translateX(100%); }
+              }
+              .animate-shimmer {
+                animation: shimmer 2.5s infinite linear;
+              }
+              
+              @keyframes text-gradient {
+                0%, 100% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+              }
+              .animate-text-gradient {
+                background-size: 200% auto;
+                animation: text-gradient 3s linear infinite;
+              }
+            `}</style>
+
             <Button
               size="lg"
               onClick={scrollToProjects}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-elegant hover:shadow-glow transition-all duration-300 group"
-              data-umami-event="Hero - Clicked View My Work"
+              // Light mode: Solid Brand Green | Dark mode: Kept exactly as you requested
+              className="relative overflow-hidden bg-primary hover:bg-primary/90 dark:bg-background/20 dark:hover:bg-primary/20 border border-primary/20 dark:border-primary/50 backdrop-blur-sm shadow-elegant hover:shadow-glow transition-all duration-300 group"
+              data-umami-event="Hero - Clicked View AI Projects"
             >
-              View My Work
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              {/* Shimmer sweep: Bright white in light mode, tinted in dark mode */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 dark:via-primary/20 to-transparent animate-shimmer" />
+              
+              {/* Icon: White in light mode, bright primary in dark mode */}
+              <Sparkles className="mr-2 h-4 w-4 text-white dark:text-primary group-hover:scale-125 transition-transform duration-300 relative z-10" />
+              
+              {/* Animated Text: White gradient in light mode, bright glow in dark mode */}
+              <span className="font-bold tracking-wide relative z-10 bg-gradient-to-r from-white via-white/80 to-white dark:from-primary dark:via-white dark:to-primary animate-text-gradient bg-clip-text text-transparent">
+                View AI Projects
+              </span>
+              
+              {/* Arrow: White in light mode, bright primary in dark mode */}
+              <ArrowRight className="ml-2 h-5 w-5 text-white dark:text-primary group-hover:translate-x-1 transition-transform relative z-10" />
             </Button>
+            
             <Button
               size="lg"
               variant="outline"

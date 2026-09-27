@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ExternalLink, Github, Filter, X, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, FileText, ChartBar as BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,7 +9,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 interface Project {
   id: number;
   title: string;
-  category: "Product" | "Design" | "Analytics";
+  category: "Product" | "AI" | "Analytics";
   subCategory?: "Product Cases" | "PRD" | "Wireframes";
   description: string;
   fullDescription?: string;
@@ -21,7 +21,7 @@ interface Project {
   imageUrl?: string;
   featured: boolean;
   process?: string[];
-  context?: string;
+  context?: string | React.ReactNode; // Update this line!;
 }
 
 const projects: Project[] = [
@@ -145,10 +145,60 @@ const projects: Project[] = [
     techStack: ["Python", "Pandas", "Data Visualization", "EDA"],
     github: "https://github.com/ShubhM-21/EDA_E-Commerce_Sales_Python",
     featured: false
+  },
+  {
+    id: 10,
+    title: "AI-Powered Voice of Customer (VoC) Intelligence Platform",
+    category: "AI",
+    description: "An automated VoC engine that feeds raw audio links directly into Gemini Multimodal to extract structured operational dimensions into an interactive dashboard.",
+    fullDescription: "An end-to-end Voice of Customer (VoC) analytics and intelligence engine built to ingest, process, and analyze customer support and sales call recordings at scale. It replaces manual call auditing with automated multimodal transcription, acoustic sentiment diagnosis, structured root-cause attribution, and an executive command center dashboard.",
+    context: (
+      <div className="flex flex-col gap-3">
+        <a 
+          href="https://ai-call-recording-analyser.onrender.com/" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="font text-brand-primary hover:underline"
+        >
+          Live Application: https://ai-call-recording-analyser.onrender.com/
+        </a>
+        <span>At consumer product companies, listening to thousands of minutes of customer care recordings manually is not scalable. This leads to critical product defects taking weeks to surface and subjective, unquantified customer sentiment reports.</span>
+      </div>
+    ),
+    impact: "Captures non-verbal cues like sighs and tone escalation that text-only transcripts miss, and reduces cross-functional alignment time from days to minutes.",
+    techStack: ["Antigravity", "FastAPI", "Python", "Google Gemini API", "Airtable", "Chart.js"],
+    link: "https://ai-call-recording-analyser.onrender.com/",
+    //imageUrl: "/Images/VoC_Analyser.webp", // Update with your actual image path
+    featured: true,
+  },
+  {
+    id: 11,
+    title: "PulseOps: AI-Native Cross-Functional Orchestration",
+    category: "AI",
+    description: "An AI-native cross-functional orchestration engine that ingests tickets, runs AI cognitive triage, and connects role-based ticket claiming and SLA tracking.",
+    fullDescription: "PulseOps is a cross-functional orchestration engine that unifies intake, automated AI routing, role-based ticket claiming, segregated discussion channels, and strict business-hours SLA compliance. It enforces a strict 3-tier messaging and alert architecture to prevent conversation bleed and state collisions.",
+    context: (
+      <div className="flex flex-col gap-3">
+        <a 
+          href="https://pulseops-beep-yu6l.vercel.app/" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="font text-brand-primary hover:underline"
+        >
+          Live Deployment: https://pulseops-beep-yu6l.vercel.app/
+        </a>
+        <span>Modern product organizations stumble when work requires synchronization across Product, Engineering, Admin, Design, Marketing, and Content. Standard project trackers either silo conversations within individual functional boards or clutter ticket logs with chat traffic.</span>
+      </div>
+    ),
+    impact: "Eliminates unassigned tickets, missed deliverables, and manual triage delays through automated routing and SLA compliance tracking.",
+    techStack: ["Supabase", "Gemini AI", "Antigravity", "Next.js", "React"],
+    link: "https://pulseops-beep-yu6l.vercel.app/",
+    //imageUrl: "/Images/PulseOps.jpg", // Update with your actual image path
+    featured: true,
   }
 ];
 
-const mainCategories = ["All", "Product", "Design", "Analytics"];
+const mainCategories = ["All", "Product", "AI", "Analytics"];
 const productSubCategories = ["All", "Product Cases", "PRD", "Wireframes"];
 
 // Helper function to convert Google Drive share link to embed link
@@ -168,6 +218,27 @@ export function FeaturedProjectsSection() {
   const [showAllProjects, setShowAllProjects] = useState(false);
   // CHANGE 4: pagination state for mobile 3-cards-per-page view
   const [mobilePage, setMobilePage] = useState(0);
+
+  // --- ADD THIS NEW LISTENER BLOCK HERE ---
+  useEffect(() => {
+    const handleCategorySwitch = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      // Change the category to whatever was passed (e.g., "AI")
+      setActiveCategory(customEvent.detail);
+      // Reset the other filters
+      setActiveSubCategory("All");
+      setShowAllProjects(false);
+    };
+
+    // Start listening for the event from the Hero button
+    window.addEventListener("switchToCategory", handleCategorySwitch);
+    
+    // Clean up the listener when the component unmounts
+    return () => {
+      window.removeEventListener("switchToCategory", handleCategorySwitch);
+    };
+  }, []);
+
 
   const filteredProjects = projects.filter(project => {
     if (activeCategory === "All") return true;
